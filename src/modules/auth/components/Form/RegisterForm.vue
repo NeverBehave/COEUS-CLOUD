@@ -60,7 +60,7 @@
                     />
                 </el-input>
             </el-form-item>
-            <el-form-item prop="address">
+            <el-form-item prop="phone">
                 <el-input
                     v-model="form.phone"
                     placeholder="手机号"
@@ -72,6 +72,12 @@
                         class="font-awesome-element-input-icon"
                     />
                 </el-input>
+            </el-form-item>
+            <el-form-item label="类型" prop="type">
+                <el-radio-group v-model="form.type">
+                    <el-radio label="个人"></el-radio>
+                    <el-radio label="企业"></el-radio>
+                </el-radio-group>
             </el-form-item>
             <el-form-item class="center">
                 <el-button
@@ -92,93 +98,97 @@ import { mapActions } from 'vuex'
 import phone from 'phone'
 
 export default {
-    data() {
-        return {
-            form: {
-                email: '',
-                password: '',
-                username: '',
-                address: '',
-                phone: ''
-            },
-            rules: {
-                email: [
-                    { required: true, message: '请输入邮箱' },
-                    { type: 'email', message: '请输入正确的邮箱', trigger: ['blur', 'change'] },
-                ],
-                password: [
-                    { required: true, message: '请输入密码' },
-                ],
-                username: [
-                    { required: true, message: '请输入用户名' },
-                ],
-                address: [
-                    { required: true, message: '请输入地址' },
-                ],
-                phone: [
-                    { required: true, message: '请输入手机号码' },
-                    { validator: this.validatePhone}
-                ],
-            },
-            isLoading: false,
-        }
-    },
-    mounted() {
-        // const { token } = this.$route.params
-
-        // if (token) {
-        //     this.form.inviteCode = token
-        // }
-    },
-    methods: {
-        async registerUser() {
-            this.isLoading = true
-            this.$refs.registerForm.validate(vaild => {
-                if (vaild) {
-                    const postBody = this.form
-
-                    return register(postBody).then(() => {
-                        this.$notify({
-                            title: '注册成功',
-                            message: '即将重定向到登录页面',
-                            type: 'success',
-                        })
-                        setTimeout(() => this.$router.push({name: 'Login'}), 2000)
-                        this.isLoading = false
-                    }).catch(err => {
-                        const {data, status} = err.response
-
-                        if (status === 422) {
-                            this.$notify({
-                                title: '验证失败',
-                                message: data.messages[0].message,
-                                type: 'error',
-                            })
-                        }
-
-                        if (data.errorType === 'DupEntry') {
-                            // User exsit
-                            this.$notify({
-                                title: '注册失败',
-                                message: '用户已存在',
-                                type: 'error',
-                            })
-                        }
-
-                        this.isLoading = false
-                    })
-                }
-                this.isLoading = false
-                return false
-            })
-        },
-        validatePhone(rule, value, callback) {
-            if (!phone(value, 'CHN')) {
-                callback(new Error('请输入正确的中国大陆手机号码'))
-            } else {
-                callback()
-            }
-        }
+  data () {
+    return {
+      form: {
+        email: '',
+        password: '',
+        username: '',
+        address: '',
+        phone: '',
+        type: ''
+      },
+      rules: {
+        email: [
+          { required: true, message: '请输入邮箱' },
+          { type: 'email', message: '请输入正确的邮箱', trigger: ['blur', 'change'] }
+        ],
+        password: [
+          { required: true, message: '请输入密码' }
+        ],
+        username: [
+          { required: true, message: '请输入用户名' }
+        ],
+        address: [
+          { required: true, message: '请输入地址' }
+        ],
+        phone: [
+          { required: true, message: '请输入手机号码' },
+          { validator: this.validatePhone }
+        ],
+        type: [
+          { required: true, message: '请选择类型' }
+        ]
+      },
+      isLoading: false
     }
+  },
+  mounted () {
+    // const { token } = this.$route.params
+
+    // if (token) {
+    //     this.form.inviteCode = token
+    // }
+  },
+  methods: {
+    async registerUser () {
+      this.isLoading = true
+      this.$refs.registerForm.validate(vaild => {
+        if (vaild) {
+          const postBody = this.form
+
+          return register(postBody).then(() => {
+            this.$notify({
+              title: '注册成功',
+              message: '即将重定向到登录页面',
+              type: 'success'
+            })
+            setTimeout(() => this.$router.push({ name: 'Login' }), 2000)
+            this.isLoading = false
+          }).catch(err => {
+            const { data, status } = err.response
+
+            if (status === 422) {
+              this.$notify({
+                title: '验证失败',
+                message: data.messages[0].message,
+                type: 'error'
+              })
+            }
+
+            if (data.errorType === 'DupEntry') {
+              // User exsit
+              this.$notify({
+                title: '注册失败',
+                message: '用户已存在',
+                type: 'error'
+              })
+            }
+
+            this.isLoading = false
+          })
+        }
+        this.isLoading = false
+        return false
+      })
+    },
+    validatePhone (rule, value, callback) {
+      if (phone(value, 'CHN').length === 0) {
+        callback(new Error('请输入正确的中国大陆手机号码'))
+      } else {
+        callback()
+      }
+    }
+  }
 }
 </script>

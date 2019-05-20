@@ -20,18 +20,16 @@
     </div>
 </template>
 
-
 <script>
 import RegisterForm from '../Form/RegisterForm'
 
 export default {
-    components: { RegisterForm },
+  components: { RegisterForm }
 }
 </script>
 
-
 <style lang="sass" scoped>
-#register-model 
+#register-model
     margin-top: 15vh
     height: 100px
 </style>

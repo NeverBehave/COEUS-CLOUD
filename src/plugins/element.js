@@ -10,7 +10,9 @@ import { Container,
   Card,
   Form,
   Input,
-  FormItem } from 'element-ui'
+  FormItem,
+  Radio,
+  RadioGroup } from 'element-ui'
 
 Vue.use(Container)
 Vue.use(Header)
@@ -20,6 +22,9 @@ Vue.use(Footer)
 
 Vue.use(Row)
 Vue.use(Col)
+
+Vue.use(Radio)
+Vue.use(RadioGroup)
 
 Vue.use(Card)
 Vue.use(Button)

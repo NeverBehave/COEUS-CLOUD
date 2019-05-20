@@ -34,16 +34,15 @@
     </div>
 </template>
 
-
 <style lang="sass">
-#form-footer 
+#form-footer
     display: flex
     padding-top: 12px
 
-#form-footer a 
+#form-footer a
     color: white
     text-decoration: none
 
-#form-footer__right 
+#form-footer__right
     margin-left: auto
 </style>

@@ -12,5 +12,10 @@ export default [{
     path: '/register',
     name: 'Register',
     component: () => import(/* webpackChunkName: "Register" */ './views/Register')
-  }]
+  }, {
+    path: '/passwordReset',
+    name: 'PasswordReset',
+    component: () => import(/* webpackChunkName: "Register" */ './views/PasswordReset')
+  }
+  ]
 }]
