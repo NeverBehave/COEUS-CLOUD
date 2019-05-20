@@ -16,21 +16,21 @@ export default new Router({
   routes: [
     ...LandingRouter,
     {
-      path: '',
+      path: '/',
       component: InitLayout,
       children: [
         ...AuthRouter
       ]
     },
     {
-      path: '',
+      path: '/',
       component: MainLayout,
       children: [
         ...DashboardRouter
       ]
     },
     { // Fallback
-      path: '',
+      path: '/',
       component: InitLayout,
       children: [{
         path: '*',

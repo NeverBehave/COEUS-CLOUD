@@ -2,9 +2,10 @@ import initLayout from '@/layouts/init'
 
 export default [{
   path: '/dashboard',
-  name: 'DashboardRouter',
   component: initLayout,
   children: [{
-
+      path: '/',
+      name: 'DashBoard',
+      component: () => import(/* webpackChunkName: "Dashboard" */ './views/main')
   }]
 }]

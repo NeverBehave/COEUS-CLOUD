@@ -6,6 +6,6 @@ export default [{
   children: [{
     path: '/',
     name: 'AppInit',
-    component: () => import(/* webpackChunkName: "action" */ './views/main')
+    component: () => import(/* webpackChunkName: "landing" */ './views/main')
   }]
 }]

@@ -2,7 +2,6 @@ import authLayout from './layout'
 
 export default [{
   path: '/auth',
-  name: 'AuthRouter',
   component: authLayout,
   children: [{
     path: '/login',
@@ -16,6 +15,5 @@ export default [{
     path: '/passwordReset',
     name: 'PasswordReset',
     component: () => import(/* webpackChunkName: "Register" */ './views/PasswordReset')
-  }
-  ]
+  }]
 }]
