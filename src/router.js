@@ -1,6 +1,12 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Home from './views/Home.vue'
+
+import InitLayout from '@/layouts/init'
+import DashboardLayout from '@/layouts/dashboard'
+
+import LandingRouter from '@/modules/landing/router'
+import AuthRouter from '@/modules/auth/router'
+import DashboardRouter from '@/modules/dashboard/router'
 
 Vue.use(Router)
 
@@ -9,17 +15,27 @@ export default new Router({
   base: process.env.BASE_URL,
   routes: [
     {
-      path: '/',
-      name: 'home',
-      component: Home
+      path: '',
+      component: InitLayout,
+      children: [
+        ...LandingRouter,
+        ...AuthRouter
+      ]
     },
     {
-      path: '/about',
-      name: 'about',
-      // route level code-splitting
-      // this generates a separate chunk (about.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import(/* webpackChunkName: "about" */ './views/About.vue')
+      path: '',
+      component: DashboardLayout,
+      children: [
+        ...DashboardRouter
+      ]
+    },
+    { // Fallback
+      path: '',
+      component: InitLayout,
+      children: [{
+        path: '*',
+        component: () => import( /* webpackChunkName: "WIP" */ '@/views/WIP')
+      }]
     }
   ]
 })

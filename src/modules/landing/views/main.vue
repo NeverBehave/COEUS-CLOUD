@@ -1,0 +1,9 @@
+<template>
+    <div>
+        <p>Landing</p>
+        <ul>
+            <li>Login</li>
+            <li>Dashboard</li>
+        </ul>
+    </div>
+</template>

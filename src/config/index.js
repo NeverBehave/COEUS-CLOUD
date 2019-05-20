@@ -1,0 +1,3 @@
+import './vuex'
+
+import './antd'
