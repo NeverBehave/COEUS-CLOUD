@@ -12,7 +12,11 @@ import { Container,
   Input,
   FormItem,
   Radio,
-  RadioGroup } from 'element-ui'
+  RadioGroup,
+  MessageBox,
+  Message,
+  Loading,
+  Notification } from 'element-ui'
 
 Vue.use(Container)
 Vue.use(Header)
@@ -32,3 +36,13 @@ Vue.use(Button)
 Vue.use(Form)
 Vue.use(FormItem)
 Vue.use(Input)
+
+Vue.use(Loading.directive)
+
+Vue.prototype.$loading = Loading.service
+Vue.prototype.$msgbox = MessageBox
+Vue.prototype.$alert = MessageBox.alert
+Vue.prototype.$confirm = MessageBox.confirm
+Vue.prototype.$prompt = MessageBox.prompt
+Vue.prototype.$notify = Notification
+Vue.prototype.$message = Message

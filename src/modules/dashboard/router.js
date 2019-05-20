@@ -4,5 +4,7 @@ export default [{
   path: '/dashboard',
   name: 'DashboardRouter',
   component: initLayout,
-  children: []
+  children: [{
+
+  }]
 }]

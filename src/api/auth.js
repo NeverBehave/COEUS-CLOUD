@@ -8,9 +8,12 @@ export async function getMe () {
 
 export async function login (data) {
   return axios({
-    url: '/user/invite',
+    url: '/login',
     method: 'post',
-    data
+    data: {
+      account: data.email,
+      password: data.password
+    }
   })
 }
 
@@ -26,6 +29,12 @@ export async function register (data) {
   return axios({
     url: '/regin',
     method: 'post',
-    data
+    data: {
+      ...data,
+      account: data.username,
+      oldPassword: data.password,
+      remark: 'string', // ???
+      userType: data.type
+    }
   })
 }

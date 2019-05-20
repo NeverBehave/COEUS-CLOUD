@@ -13,9 +13,12 @@
             >
                 登录
             </router-link>
-            <a id="form-footer__right">
+            <router-link
+                id="form-footer__right"
+                :to="{ name: 'PasswordReset' }"
+            >
                 忘记密码
-            </a>
+            </router-link>
         </div>
     </div>
 </template>

@@ -13,7 +13,7 @@
             <el-form-item prop="email">
                 <el-input
                     v-model="form.email"
-                    placeholder="请输入邮箱"
+                    placeholder="用户名"
                 >
                     <font-awesome-icon
                         slot="prefix"
@@ -25,7 +25,7 @@
             <el-form-item prop="password">
                 <el-input
                     v-model="form.password"
-                    placeholder="请输入密码"
+                    placeholder="密码"
                     type="password"
                 >
                     <font-awesome-icon
@@ -63,11 +63,11 @@ export default {
       },
       rules: {
         email: [
-          { required: true, message: '请输入邮箱' },
-          { type: 'email', message: '请输入正确的邮箱', trigger: ['blur', 'change'] }
+          { required: true, message: '请输入用户名' }
         ],
         password: [
-          { required: true, message: '请输入密码' }
+          { required: true, message: '请输入密码' },
+          { min: 8, max: 13, message: '长度在 8 到 13 个字符', trigger: 'blur' }
         ]
       },
       isLoading: false
@@ -77,62 +77,32 @@ export default {
     ...mapGetters('user', ['profile'])
   },
   mounted () {
-    const { token } = this.$route.query
-
-    if (!token || token === '') {
-      return
-    }
-
-    this.login(token)
     loading = Loading.service({ fullscreen: true })
-
-    const func = async () => {
-      await this.getMe()
-      this.$router.push({ name: 'DashboardHome' })
-
-      loading.close()
-    }
-
-    func()
+    loading.close()
   },
   methods: {
     ...mapActions('user', ['login', 'getMe']),
-    async gotoOAuth () {
-      const redirectUrl = await getOAuthLink()
-
-      this.setOAuthWithLogin(true)
-      window.location.href = redirectUrl
-    },
     async loginUser () {
       this.isLoading = true
       this.$refs.loginForm.validate(vaild => {
         if (vaild) {
-          return true
           return login(this.form).then(data => {
             this.$notify({
               title: '登陆成功',
-              message: '即将重定向到用户面板',
+              message: '即将重定向到面板',
               type: 'success'
             })
             this.login(data.data.token)
-            setTimeout(() => this.$router.push({ name: 'DashboardHome' }), 2000)
+            setTimeout(() => this.$router.push({ name: 'Dashboard' }), 2000)
             this.isLoading = false
           }).catch(err => {
-            const { data, status } = err.response
+            const { data } = err.response
+            const code = data.code
 
-            if (status === 422) {
+            if (code === '303') {
               this.$notify({
                 title: '验证失败',
-                message: data.messages[0].message,
-                type: 'error'
-              })
-            }
-
-            if (data.errorType === 'NotFound') {
-              // User exsit
-              this.$notify({
-                title: '登陆失败',
-                message: '找不到此用户',
+                message: data.msg,
                 type: 'error'
               })
             }

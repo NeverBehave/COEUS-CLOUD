@@ -7,14 +7,14 @@ import { mapGetters } from 'vuex'
 
 export default {
   computed: {
-    ...mapGetters('user', ['token'])
+    ...mapGetters('auth', ['isLogin'])
   },
   mounted () {
     // if login , goto dashboard
-    if (!this.token || this.token === '') {
+    if (!this.isLogin) {
       this.$router.push({ name: 'Login' })
     } else {
-      this.$router.push({ name: 'DashboardHome' })
+      this.$router.push({ name: 'Dashboard' })
     }
   }
 }

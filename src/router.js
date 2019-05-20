@@ -14,11 +14,11 @@ export default new Router({
   mode: 'history',
   base: process.env.BASE_URL,
   routes: [
+    ...LandingRouter,
     {
       path: '',
       component: InitLayout,
       children: [
-        ...LandingRouter,
         ...AuthRouter
       ]
     },

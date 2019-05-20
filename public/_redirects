@@ -1,0 +1,2 @@
+/api/*  http://cloud.coeus3d.com/:splat  200
+/*    /index.html   200

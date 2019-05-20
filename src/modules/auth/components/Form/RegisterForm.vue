@@ -75,8 +75,8 @@
             </el-form-item>
             <el-form-item label="类型" prop="type">
                 <el-radio-group v-model="form.type">
-                    <el-radio label="个人"></el-radio>
-                    <el-radio label="企业"></el-radio>
+                    <el-radio label="个人" value=0></el-radio>
+                    <el-radio label="企业" value=1></el-radio>
                 </el-radio-group>
             </el-form-item>
             <el-form-item class="center">
@@ -114,7 +114,8 @@ export default {
           { type: 'email', message: '请输入正确的邮箱', trigger: ['blur', 'change'] }
         ],
         password: [
-          { required: true, message: '请输入密码' }
+          { required: true, message: '请输入密码' },
+          { min: 8, max: 13, message: '长度在 8 到 13 个字符', trigger: 'blur' }
         ],
         username: [
           { required: true, message: '请输入用户名' }
@@ -156,21 +157,13 @@ export default {
             setTimeout(() => this.$router.push({ name: 'Login' }), 2000)
             this.isLoading = false
           }).catch(err => {
-            const { data, status } = err.response
+            const { data } = err.response
+            const code = data.code
 
-            if (status === 422) {
+            if (code === '400') {
               this.$notify({
                 title: '验证失败',
-                message: data.messages[0].message,
-                type: 'error'
-              })
-            }
-
-            if (data.errorType === 'DupEntry') {
-              // User exsit
-              this.$notify({
-                title: '注册失败',
-                message: '用户已存在',
+                message: data.msg,
                 type: 'error'
               })
             }

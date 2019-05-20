@@ -2,7 +2,6 @@ import initLayout from '@/layouts/init'
 
 export default [{
   path: '/',
-  name: 'Landing',
   component: initLayout,
   children: [{
     path: '/',

@@ -1,7 +1,6 @@
 import axios from 'axios'
-import store from '@/store'
 
-const API_ENDPOINT = 'http://127.0.0.1'
+const API_ENDPOINT = '/api/'
 
 const service = axios.create({
   baseURL: API_ENDPOINT,
@@ -23,7 +22,11 @@ service.interceptors.request.use(config => {
 })
 
 service.interceptors.response.use((response) => {
-  console.log(response)
+  if (response.data.code !== '200') {
+    const err = new Error('code check failed')
+    err.response = response
+    throw err
+  }
 })
 
 export default service
