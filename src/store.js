@@ -3,13 +3,15 @@
 import Vuex from 'vuex'
 
 import auth from '@/modules/auth/store'
+import user from '@/modules/user/store'
 
 // A Vuex instance is created by combining the state, mutations, actions,
 // and getters.
 export default new Vuex.Store({
   modules: {
-    auth
-  },
+    auth,
+    user
+  }
   // plugins: [createPersistedState({
   //   reducer(state) {
   //     // No need to use let as the reducer itself can be immutable which do not mean that the properties

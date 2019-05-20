@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 
 import InitLayout from '@/layouts/init'
-import DashboardLayout from '@/layouts/dashboard'
+import MainLayout from '@/layouts/main'
 
 import LandingRouter from '@/modules/landing/router'
 import AuthRouter from '@/modules/auth/router'
@@ -24,7 +24,7 @@ export default new Router({
     },
     {
       path: '',
-      component: DashboardLayout,
+      component: MainLayout,
       children: [
         ...DashboardRouter
       ]
@@ -34,7 +34,7 @@ export default new Router({
       component: InitLayout,
       children: [{
         path: '*',
-        component: () => import( /* webpackChunkName: "WIP" */ '@/views/WIP')
+        component: () => import(/* webpackChunkName: "WIP" */ '@/views/WIP')
       }]
     }
   ]

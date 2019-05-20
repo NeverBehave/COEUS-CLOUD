@@ -1,3 +1,3 @@
-import './vuex'
+import './fa'
 
-import './antd'
+import './vuex'
