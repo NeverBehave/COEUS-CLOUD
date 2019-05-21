@@ -1,31 +1,54 @@
 <template>
     <div>
-        <el-row
-            type="flex"
-            class="row-bg"
-            justify="space-around"
-        >
+        <el-row>
             <el-col>
                 <div class="grid-content full-width">
                     <Carousel/>
                 </div>
             </el-col>
         </el-row>
+        <el-row>
+            <div>
+              <el-divider>数据统计</el-divider>
+            </div>
+        </el-row>
         <el-row
-            type="flex"
-            class="row-bg"
-            justify="space-around"
+            :gutter="10"
         >
-            <el-col>
+            <el-col
+                :xs="row1.xs"
+                :sm="row1.sm"
+                :md="row1.md"
+                :lg="row1.lg"
+                :xl="row1.xl"
+            >
                 <Devices/>
             </el-col>
-            <el-col>
+            <el-col
+                :xs="row1.xs"
+                :sm="row1.sm"
+                :md="row1.md"
+                :lg="row1.lg"
+                :xl="row1.xl"
+            >
                 <Material/>
             </el-col>
-            <el-col>
+            <el-col
+                :xs="row1.xs"
+                :sm="row1.sm"
+                :md="row1.md"
+                :lg="row1.lg"
+                :xl="row1.xl"
+            >
                 <Share/>
             </el-col>
-            <el-col>
+            <el-col
+                :xs="row1.xs"
+                :sm="row1.sm"
+                :md="row1.md"
+                :lg="row1.lg"
+                :xl="row1.xl"
+            >
                 <Tasks/>
             </el-col>
         </el-row>
@@ -35,17 +58,33 @@
             </div>
         </el-row>
         <el-row
-            type="flex"
-            class="row-bg"
-            justify="space-around"
+            :gutter="10"
         >
-            <el-col>
+            <el-col
+                :xs="row2.xs"
+                :sm="row2.sm"
+                :md="row2.md"
+                :lg="row2.lg"
+                :xl="row2.xl"
+            >
                 <DeviceUsage/>
             </el-col>
-            <el-col>
+            <el-col
+                :xs="row2.xs"
+                :sm="row2.sm"
+                :md="row2.md"
+                :lg="row2.lg"
+                :xl="row2.xl"
+            >
                 <MaterialUsage/>
             </el-col>
-            <el-col>
+            <el-col
+                :xs="row2.xs"
+                :sm="row2.sm"
+                :md="row2.md"
+                :lg="row2.lg"
+                :xl="row2.xl"
+            >
                 <TaskUsage/>
             </el-col>
         </el-row>
@@ -74,6 +113,24 @@ export default {
     DeviceUsage,
     MaterialUsage,
     TaskUsage
+  },
+  data() {
+      return {
+        row1: {
+            xs: 24,
+            sm: 24,
+            md: 12,
+            lg: 6,
+            xl: 6
+        },
+        row2: {
+            xs: 24,
+            sm: 24,
+            md: 16,
+            lg: 8,
+            xl: 8
+        }
+      }
   }
 }
 </script>

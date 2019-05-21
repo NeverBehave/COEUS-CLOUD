@@ -1,7 +1,4 @@
 <template>
-    <div>newTask</div>
-</template>
-<template>
     <el-row>
         <el-col>
             <NewTaskCard/>

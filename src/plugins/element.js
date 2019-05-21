@@ -32,6 +32,7 @@ import { Container,
   Tabs,
   TabPane,
   Dialog,
+  Image,
   MessageBox, // SERVICES
   Message,
   Loading,
@@ -87,6 +88,7 @@ Vue.use(TabPane)
 
 Vue.use(Dialog)
 
+Vue.use(Image)
 Vue.use(Loading.directive)
 
 Vue.prototype.$loading = Loading.service

@@ -6,6 +6,8 @@ import auth from '@/modules/auth/store'
 import user from '@/modules/user/store'
 import local from '@/modules/local/store'
 
+import dashboard from '@/modules/dashboard/store'
+
 import task from '@/modules/task/store'
 import device from '@/modules/device/store'
 
@@ -17,6 +19,7 @@ export default new Vuex.Store({
     user,
     task,
     device,
+    dashboard,
     local
   }
   // plugins: [createPersistedState({
