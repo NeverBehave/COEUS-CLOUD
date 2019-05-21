@@ -102,6 +102,7 @@ import MaterialUsage from '../components/Cards/MaterialUsage'
 import TaskUsage from '../components/Cards/TaskUsage'
 
 import Carousel from '../components/Carousel'
+
 export default {
   name: 'Dashboard',
   components: {
@@ -146,4 +147,24 @@ export default {
 
 #form-footer__right
     margin-left: auto
+
+// For Boxes, @TODO
+.box
+    letter-spacing: -3px
+    position: relative
+    text-align: center
+    border-radius: 3px
+    font: 5em "Open Sans"
+    margin: -25px auto 0px
+
+.left
+    font-size: 25px
+    margin-right: 20px
+    position: relative
+
+.font
+    font-size: 60px
+    margin-right: 10px
+    position: relative
+    top: 10px
 </style>
