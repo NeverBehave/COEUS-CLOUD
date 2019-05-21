@@ -21,6 +21,8 @@ import { Container,
   MenuItemGroup,
   Submenu,
   Badge,
+  Carousel,
+  CarouselItem,
   MessageBox, // SERVICES
   Message,
   Loading,
@@ -56,6 +58,9 @@ Vue.use(MenuItemGroup)
 Vue.use(Submenu)
 
 Vue.use(Badge)
+
+Vue.use(Carousel)
+Vue.use(CarouselItem)
 
 Vue.use(Loading.directive)
 

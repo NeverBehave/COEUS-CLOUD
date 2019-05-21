@@ -154,11 +154,11 @@ export default {
             this.isLoading = false
           }).catch(err => {
             const { data } = err.response
-            
+
             this.$notify({
-            title: '操作失败',
-            message: data.msg,
-            type: 'error'
+              title: '操作失败',
+              message: data.msg,
+              type: 'error'
             })
 
             this.isLoading = false

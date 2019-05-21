@@ -6,6 +6,6 @@ export default [{
   children: [{
     path: '/',
     name: 'Dashboard',
-    component: () => import(/* webpackChunkName: "Dashboard" */ './views/main')
+    component: () => import(/* webpackChunkName: "Dashboard" */ './views/Dashboard')
   }]
 }]

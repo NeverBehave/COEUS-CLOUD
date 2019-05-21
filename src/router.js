@@ -8,6 +8,11 @@ import LandingRouter from '@/modules/landing/router'
 import AuthRouter from '@/modules/auth/router'
 import DashboardRouter from '@/modules/dashboard/router'
 
+import DeviceRouter from '@/modules/device/router'
+import MaterialRouter from '@/modules/material/router'
+import TaskRouter from '@/modules/task/router'
+import UserRouter from '@/modules/user/router'
+
 Vue.use(Router)
 
 export default new Router({
@@ -26,7 +31,11 @@ export default new Router({
       path: '/',
       component: MainLayout,
       children: [
-        ...DashboardRouter
+        ...DashboardRouter,
+        ...DeviceRouter,
+        ...MaterialRouter,
+        ...TaskRouter,
+        ...UserRouter,
       ]
     },
     { // Fallback

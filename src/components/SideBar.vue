@@ -14,7 +14,6 @@
                 </el-menu-item>
             </router-link>
 
-
              <router-link
                 :to="{'name': 'Dashboard'}"
             >
@@ -120,20 +119,6 @@
                     </router-link>
                 </el-menu-item-group>
             </el-submenu>
-            
-            <router-link
-                :to="{'name': 'AdminIndex'}"
-            >
-                <el-menu-item
-                    v-if="profile.isAdmin"
-                    index="admin"
-                >
-                    <font-awesome-icon
-                        icon="user-shield"
-                    />
-                    管理面板
-                </el-menu-item>
-            </router-link>
         </el-menu>
     </el-aside>
 </template>
@@ -143,23 +128,21 @@ import { mapGetters } from 'vuex'
 import Logo from './logo'
 
 export default {
-    components: {
-        Logo
-    },
-    computed: {
-        ...mapGetters('user', ['profile']),
-    },
+  components: {
+    Logo
+  },
+  computed: {
+    ...mapGetters('user', ['profile'])
+  }
 }
 </script>
 
-
 <style lang="sass">
-.el-aside 
+.el-aside
     color: #333
 </style>
 
 <style lang="sass" scoped>
 a
     text-decoration: none
-
 </style>

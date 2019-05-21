@@ -33,11 +33,11 @@ export default {
     Header,
     SideBar
   },
-    data() {
-        return {
-            isHideSideBar: false,
-        }
-    },
+  data () {
+    return {
+      isHideSideBar: false
+    }
+  },
   computed: {
     ...mapGetters('auth', ['isLogin'])
   },
@@ -48,16 +48,16 @@ export default {
       }
     }
   },
-    mounted() {
-        if (window.innerWidth < 767) {
-            this.tiggerHeadbar()
-        }
-    },
-    methods: {
-        tiggerHeadbar() {
-            this.isHideSideBar = !this.isHideSideBar
-        },
-    },
+  mounted () {
+    if (window.innerWidth < 767) {
+      this.tiggerHeadbar()
+    }
+  },
+  methods: {
+    tiggerHeadbar () {
+      this.isHideSideBar = !this.isHideSideBar
+    }
+  }
 }
 </script>
 
@@ -68,12 +68,13 @@ export default {
 
 #footer
   text-align: center
+  background-color: #b3c0d1
 
-.move-in-enter-active, .move-in-leave-active 
+.move-in-enter-active, .move-in-leave-active
     transition: 0.5s
     opacity: 1
 
-.move-in-enter, .move-in-leave-to 
+.move-in-enter, .move-in-leave-to
     opacity: 0
 
 </style>
