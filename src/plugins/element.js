@@ -13,7 +13,15 @@ import { Container,
   FormItem,
   Radio,
   RadioGroup,
-  MessageBox,
+  Dropdown,
+  DropdownItem,
+  DropdownMenu,
+  Menu,
+  MenuItem,
+  MenuItemGroup,
+  Submenu,
+  Badge,
+  MessageBox, // SERVICES
   Message,
   Loading,
   Notification } from 'element-ui'
@@ -36,6 +44,18 @@ Vue.use(Button)
 Vue.use(Form)
 Vue.use(FormItem)
 Vue.use(Input)
+
+Vue.use(Dropdown)
+Vue.use(DropdownItem)
+Vue.use(DropdownMenu)
+
+Vue.use(Menu)
+Vue.use(MenuItem)
+Vue.use(MenuItemGroup)
+
+Vue.use(Submenu)
+
+Vue.use(Badge)
 
 Vue.use(Loading.directive)
 

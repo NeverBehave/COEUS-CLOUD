@@ -1,27 +1,43 @@
 <template>
-    <el-container>
-        <el-aside width="200px">Aside</el-aside>
-        <el-container>
-            <el-header>Header</el-header>
+     <el-container>
+        <transition name="move-in">
+            <SideBar v-if="!isHideSideBar" />
+        </transition>
+
+        <div style="width: 100%">
+            <Header
+                @headTigger="tiggerHeadbar"
+            />
+
             <el-main>
                 <router-view/>
             </el-main>
-            <el-footer id="footer">
+
+              <el-footer id="footer">
                 <Footer/>
             </el-footer>
-        </el-container>
+        </div>
     </el-container>
 </template>
 
 <script>
-import Footer from '../components/Footer'
+import Header from '@/components/HeaderBar'
+import SideBar from '@/components/SideBar'
+import Footer from '@/components/Footer'
 import { mapGetters } from 'vuex'
 
 export default {
   name: 'initLayout',
   components: {
-    Footer
+    Footer,
+    Header,
+    SideBar
   },
+    data() {
+        return {
+            isHideSideBar: false,
+        }
+    },
   computed: {
     ...mapGetters('auth', ['isLogin'])
   },
@@ -31,7 +47,17 @@ export default {
         this.$router.push({ name: 'Login' })
       }
     }
-  }
+  },
+    mounted() {
+        if (window.innerWidth < 767) {
+            this.tiggerHeadbar()
+        }
+    },
+    methods: {
+        tiggerHeadbar() {
+            this.isHideSideBar = !this.isHideSideBar
+        },
+    },
 }
 </script>
 
@@ -42,4 +68,12 @@ export default {
 
 #footer
   text-align: center
+
+.move-in-enter-active, .move-in-leave-active 
+    transition: 0.5s
+    opacity: 1
+
+.move-in-enter, .move-in-leave-to 
+    opacity: 0
+
 </style>

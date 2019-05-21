@@ -1,8 +1,8 @@
-import mainLayout from '@/layouts/main'
+import layout from './layout'
 
 export default [{
   path: '/dashboard',
-  component: mainLayout,
+  component: layout,
   children: [{
     path: '/',
     name: 'Dashboard',

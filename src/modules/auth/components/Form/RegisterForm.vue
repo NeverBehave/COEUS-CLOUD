@@ -135,11 +135,7 @@ export default {
     }
   },
   mounted () {
-    // const { token } = this.$route.params
 
-    // if (token) {
-    //     this.form.inviteCode = token
-    // }
   },
   methods: {
     async registerUser () {
@@ -158,15 +154,12 @@ export default {
             this.isLoading = false
           }).catch(err => {
             const { data } = err.response
-            const code = data.code
-
-            if (code === '400') {
-              this.$notify({
-                title: '验证失败',
-                message: data.msg,
-                type: 'error'
-              })
-            }
+            
+            this.$notify({
+            title: '操作失败',
+            message: data.msg,
+            type: 'error'
+            })
 
             this.isLoading = false
           })
