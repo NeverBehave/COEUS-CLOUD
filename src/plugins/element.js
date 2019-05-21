@@ -23,6 +23,7 @@ import { Container,
   Badge,
   Carousel,
   CarouselItem,
+  Divider,
   MessageBox, // SERVICES
   Message,
   Loading,
@@ -61,6 +62,8 @@ Vue.use(Badge)
 
 Vue.use(Carousel)
 Vue.use(CarouselItem)
+
+Vue.use(Divider)
 
 Vue.use(Loading.directive)
 

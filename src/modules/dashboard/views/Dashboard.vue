@@ -29,20 +29,24 @@
                 <Tasks/>
             </el-col>
         </el-row>
-
+        <el-row>
+            <div>
+              <el-divider>实时报表</el-divider>
+            </div>
+        </el-row>
         <el-row
             type="flex"
             class="row-bg"
             justify="space-around"
         >
             <el-col>
-                <Devices/>
+                <DeviceUsage/>
             </el-col>
             <el-col>
-                <Material/>
+                <MaterialUsage/>
             </el-col>
             <el-col>
-                <Share/>
+                <TaskUsage/>
             </el-col>
         </el-row>
     </div>
@@ -54,6 +58,10 @@ import Material from '../components/Cards/Material'
 import Share from '../components/Cards/Share'
 import Tasks from '../components/Cards/Tasks'
 
+import DeviceUsage from '../components/Cards/DeviceUsage'
+import MaterialUsage from '../components/Cards/MaterialUsage'
+import TaskUsage from '../components/Cards/TaskUsage'
+
 import Carousel from '../components/Carousel'
 export default {
   name: 'Dashboard',
@@ -62,7 +70,10 @@ export default {
     Devices,
     Material,
     Share,
-    Tasks
+    Tasks,
+    DeviceUsage,
+    MaterialUsage,
+    TaskUsage
   }
 }
 </script>

@@ -35,7 +35,7 @@ export default new Router({
         ...DeviceRouter,
         ...MaterialRouter,
         ...TaskRouter,
-        ...UserRouter,
+        ...UserRouter
       ]
     },
     { // Fallback
