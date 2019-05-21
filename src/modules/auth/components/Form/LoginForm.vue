@@ -50,9 +50,7 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex'
-import { login } from '@/api/auth'
-import { Loading } from 'element-ui'
-let loading
+import { login as loginAPI } from '@/api/auth'
 
 export default {
   data () {
@@ -74,25 +72,23 @@ export default {
     }
   },
   computed: {
-    ...mapGetters('user', ['profile'])
+
   },
   mounted () {
-    loading = Loading.service({ fullscreen: true })
-    loading.close()
   },
   methods: {
-    ...mapActions('user', ['login', 'getMe']),
+    ...mapActions('auth', ['isLogin']),
     async loginUser () {
       this.isLoading = true
       this.$refs.loginForm.validate(vaild => {
         if (vaild) {
-          return login(this.form).then(data => {
+          return loginAPI(this.form).then(data => {
             this.$notify({
               title: '登陆成功',
               message: '即将重定向到面板',
               type: 'success'
             })
-            this.login(data.data.token)
+            this.isLogin(true)
             setTimeout(() => this.$router.push({ name: 'Dashboard' }), 2000)
             this.isLoading = false
           }).catch(err => {

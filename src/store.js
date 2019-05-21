@@ -4,13 +4,15 @@ import Vuex from 'vuex'
 
 import auth from '@/modules/auth/store'
 import user from '@/modules/user/store'
+import local from '@/modules/local/store'
 
 // A Vuex instance is created by combining the state, mutations, actions,
 // and getters.
 export default new Vuex.Store({
   modules: {
     auth,
-    user
+    user,
+    local
   }
   // plugins: [createPersistedState({
   //   reducer(state) {

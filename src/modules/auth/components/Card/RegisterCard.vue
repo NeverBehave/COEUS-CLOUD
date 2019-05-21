@@ -33,6 +33,6 @@ export default {
 
 <style lang="sass" scoped>
 #register-model
-    margin-top: 15vh
+    margin-top: 10vh
     height: 100px
 </style>

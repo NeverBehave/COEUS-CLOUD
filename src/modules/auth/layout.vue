@@ -6,14 +6,14 @@
             justify="space-around"
         >
             <el-col
-                :xs="2"
+                :xs="0"
                 :sm="4"
                 :md="4"
                 :lg="6"
                 :xl="6"
             />
             <el-col
-                :xs="14"
+                :xs="18"
                 :sm="10"
                 :md="10"
                 :lg="6"
@@ -24,7 +24,7 @@
                 </div>
             </el-col>
             <el-col
-                :xs="2"
+                :xs="0"
                 :sm="4"
                 :md="4"
                 :lg="6"

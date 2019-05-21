@@ -1,11 +1,11 @@
-import initLayout from '@/layouts/init'
+import mainLayout from '@/layouts/main'
 
 export default [{
   path: '/dashboard',
-  component: initLayout,
+  component: mainLayout,
   children: [{
-      path: '/',
-      name: 'DashBoard',
-      component: () => import(/* webpackChunkName: "Dashboard" */ './views/main')
+    path: '/',
+    name: 'Dashboard',
+    component: () => import(/* webpackChunkName: "Dashboard" */ './views/main')
   }]
 }]
