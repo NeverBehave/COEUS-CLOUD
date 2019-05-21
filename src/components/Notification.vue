@@ -1,5 +1,5 @@
 <template>
-    <el-badge :value="newNotifications" :hidden="isHidden" class="item">
+    <el-badge :value="getNewNotification" :hidden="isHidden" class="item">
         <font-awesome-icon
         icon="bell"
         />
@@ -7,16 +7,14 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
   name: 'Notification',
-  data () {
-    return {
-      newNotifications: 13
-    }
-  },
   computed: {
+    ...mapGetters('user', ['getNewNotification']),
     isHidden () {
-      if (this.newNotifications <= 0) {
+      if (this.getNewNotification <= 0) {
         return true
       }
 

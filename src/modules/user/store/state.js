@@ -1,5 +1,5 @@
 export default {
   token: '',
-  profile: {}
-
+  profile: {},
+  newNotification: 14
 }

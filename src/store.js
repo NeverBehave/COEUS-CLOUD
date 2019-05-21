@@ -6,12 +6,17 @@ import auth from '@/modules/auth/store'
 import user from '@/modules/user/store'
 import local from '@/modules/local/store'
 
+import task from '@/modules/task/store'
+import device from '@/modules/device/store'
+
 // A Vuex instance is created by combining the state, mutations, actions,
 // and getters.
 export default new Vuex.Store({
   modules: {
     auth,
     user,
+    task,
+    device,
     local
   }
   // plugins: [createPersistedState({

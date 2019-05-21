@@ -24,6 +24,14 @@ import { Container,
   Carousel,
   CarouselItem,
   Divider,
+  Select,
+  Option,
+  Popover,
+  DatePicker,
+  InputNumber,
+  Tabs,
+  TabPane,
+  Dialog,
   MessageBox, // SERVICES
   Message,
   Loading,
@@ -64,6 +72,20 @@ Vue.use(Carousel)
 Vue.use(CarouselItem)
 
 Vue.use(Divider)
+
+Vue.use(Select)
+Vue.use(Option)
+
+Vue.use(Popover)
+
+Vue.use(DatePicker)
+
+Vue.use(InputNumber)
+
+Vue.use(Tabs)
+Vue.use(TabPane)
+
+Vue.use(Dialog)
 
 Vue.use(Loading.directive)
 
