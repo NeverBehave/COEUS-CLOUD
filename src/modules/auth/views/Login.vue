@@ -5,19 +5,16 @@
 </template>
 
 <script>
+import loading from '@/mixins/loading'
 import LoginCard from '../components/Card/LoginCard'
 import { mapActions } from 'vuex'
 
 export default {
   name: 'Login',
-  data () {
-    return {
-      loading: this.$loading({ fullscreen: true })
-    }
-  },
   components: {
     LoginCard
   },
+  mixins: [loading],
   methods: {
     ...mapActions('auth', ['isLogin'])
   },

@@ -1,15 +1,26 @@
-import { getMe } from '@/api/auth'
+import { getMe as UserAPI,
+         updateUsername as updateUsernameAPI } from '@/api/auth'
 
 export default {
-  login ({ commit }, token) {
-    commit('setToken', token)
+  getMe ({ commit }) {
+    return UserAPI().then(res => {
+      let { data } = res.response
+      commit('username', data.account)
+      commit('address', data.address)
+      commit('email', data.email)
+      commit('id', data.id)
+      commit('phone', data.phone)
+      commit('remark', data.remark)
+      commit('userType', data.userType)
+    })
   },
-  logout ({ commit }) {
-    commit('setToken', null)
+  updateUsername ({}, newName) {
+    return updateUsernameAPI(newName)
   },
-  async getMe ({ commit }) {
-    const userInfo = await getMe()
-    commit('setProfile', userInfo.data.user)
-  }
+  updatePassword ({}, { verificationCode, password }) {
 
+  },
+  updatePhoneNumber ({}, { oldVerificatioCode, newVerificationCode, newPhone }) {
+
+  }
 }

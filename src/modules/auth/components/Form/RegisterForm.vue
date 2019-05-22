@@ -144,7 +144,7 @@ export default {
         if (vaild) {
           const postBody = this.form
 
-          return this.register(postBody).then(() => {
+          return this.register(postBody).then(res => {
             this.$notify({
               title: '注册成功',
               message: '即将重定向到登录页面',
@@ -159,10 +159,10 @@ export default {
               message: data.msg,
               type: 'error'
             })
+          }).finally(() => {
+            this.isLoading = false
           })
         }
-      }).finally(() => {
-        this.isLoading = false
       })
     },
     validatePhone (rule, value, callback) {

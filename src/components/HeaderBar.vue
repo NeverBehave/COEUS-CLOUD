@@ -12,7 +12,7 @@
                     <i class="el-icon-user admin-icon"/>
                 </span>
                 <span>
-                    {{ profile.username ? profile.username : "Unknown" }}， 欢迎！
+                    {{ username ? username : "Unknown" }}， 欢迎！
                     <i
                         class="el-icon-setting"
                         style="margin-right: 15px"
@@ -21,7 +21,7 @@
             </div>
             <el-dropdown-menu slot="dropdown">
                     <el-dropdown-item
-                        @click.native="userInfo"
+                        @click="userInfo"
                     >
                         <font-awesome-icon
                             icon="user"
@@ -36,7 +36,7 @@
                     帮助
                 </el-dropdown-item>
                 <el-dropdown-item
-                    @click.native="logout"
+                    @click="logout"
                     divided
                 >
                     <font-awesome-icon
@@ -57,7 +57,7 @@ export default {
   components: {
     Notification
   },
-  computed: { ...mapGetters('user', ['profile']) },
+  computed: { ...mapGetters('user', ['username']) },
   methods: {
     logout () {
       this.$router.push({ name: 'Logout' })

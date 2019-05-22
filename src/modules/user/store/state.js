@@ -1,5 +1,9 @@
 export default {
-  token: '',
-  profile: {},
-  newNotification: 14
+  id: '',
+  username: '',
+  address: '',
+  email: '',
+  phone: '',
+  remark: '',
+  userType: ''
 }

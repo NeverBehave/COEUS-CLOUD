@@ -91,7 +91,6 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex'
-import { login as loginAPI } from '@/api/auth'
 
 export default {
   data () {

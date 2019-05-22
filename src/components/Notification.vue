@@ -1,7 +1,7 @@
 <template>
     <el-badge :value="notificationNum"
               :hidden="isHidden"
-              @click.native="toNotification"
+              @click="toNotification"
               class="item">
             <font-awesome-icon
             icon="bell"
