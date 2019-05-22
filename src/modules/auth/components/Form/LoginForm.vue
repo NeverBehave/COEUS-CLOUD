@@ -50,7 +50,6 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex'
-import { login as loginAPI } from '@/api/auth'
 
 export default {
   data () {
@@ -77,37 +76,30 @@ export default {
   mounted () {
   },
   methods: {
-    ...mapActions('auth', ['isLogin']),
-    async loginUser () {
+    ...mapActions('auth', ['login']),
+    loginUser () {
       this.isLoading = true
       this.$refs.loginForm.validate(vaild => {
         if (vaild) {
-          return loginAPI(this.form).then(data => {
+          return this.login(this.form).then(data => {
             this.$notify({
               title: '登陆成功',
               message: '即将重定向到面板',
               type: 'success'
             })
-            this.isLogin(true)
+
             setTimeout(() => this.$router.push({ name: 'Dashboard' }), 2000)
-            this.isLoading = false
           }).catch(err => {
-            const { data } = err.response
-            const code = data.code
-
-            if (code === '303') {
-              this.$notify({
-                title: '验证失败',
-                message: data.msg,
-                type: 'error'
-              })
-            }
-
+            let { data } = err.response
+            this.$notify({
+              title: '操作失败',
+              message: data.msg,
+              type: 'error'
+            })
+          }).finally(() => {
             this.isLoading = false
           })
         }
-        this.isLoading = false
-        return false
       })
     }
   }

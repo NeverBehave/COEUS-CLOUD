@@ -1,3 +1,3 @@
 export default {
-  loaded: false
+    
 }

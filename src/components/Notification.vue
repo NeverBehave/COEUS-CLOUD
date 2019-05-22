@@ -1,25 +1,36 @@
 <template>
-    <el-badge :value="getNewNotification" :hidden="isHidden" class="item">
-        <font-awesome-icon
-        icon="bell"
-        />
+    <el-badge :value="notificationNum" :hidden="isHidden" class="item">
+            <router-link :to="{name: 'NotificationList'}">
+            <font-awesome-icon
+            icon="bell"
+            />
+        </router-link>
     </el-badge>
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 
 export default {
   name: 'Notification',
   computed: {
-    ...mapGetters('user', ['getNewNotification']),
+    ...mapGetters('notification', ['notificationNum']),
     isHidden () {
-      if (this.getNewNotification <= 0) {
+      if (this.notificationNum <= 0) {
         return true
       }
 
       return false
     }
+  },
+  methods: {
+      ...mapActions('notification', ['updateNotification'])
+  },
+  mounted() {
+      this.updateNotification().catch(err => {
+          console.log(err.data)
+          this.$message.error('通知更新失败！')
+      })
   }
 }
 </script>

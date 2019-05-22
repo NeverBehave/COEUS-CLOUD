@@ -25,9 +25,9 @@ service.interceptors.request.use(config => {
 
 service.interceptors.response.use((response) => {
   if (response.data.code !== '200') { // 200, 303, 401, 500
-    if (response.data.code === '401') {
+    if (response.data.code === '401' || response.data.code === '303') {
       // Login issue
-      store.dispatch('auth/isLogin', false)
+      store.commit('auth/isLogin', false)
     }
     const err = new Error('code check failed')
     err.response = response

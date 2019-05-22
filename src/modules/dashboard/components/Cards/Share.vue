@@ -1,5 +1,5 @@
 <template>
-    <el-card shadow="hover" class="device-card">
+    <el-card shadow="hover">
         <div slot="header">
             <span>共享总数</span>
             <el-button style="float: right; padding: 3px 0; font-size:15px" type="text">{{ ShareNumber }}</el-button>
@@ -34,10 +34,6 @@ export default {
 
 
 <style lang="sass" scoped>
-// .device-card
-//     border-color: red
-//     border-width: 3px
-
 .card-down
     text-align: center
 </style>

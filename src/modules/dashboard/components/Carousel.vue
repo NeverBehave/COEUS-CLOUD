@@ -1,6 +1,6 @@
 <template>
   <el-carousel>
-    <el-carousel-item v-for="image in getImages" :key="image">
+    <el-carousel-item v-for="image in images" :key="image">
         <el-image 
         style="width: 100%"
         fits="cover" 
@@ -14,7 +14,7 @@ import { mapGetters } from 'vuex'
 
 export default {
     computed: {
-        ...mapGetters('dashboard', ['getImages'])
+        ...mapGetters('dashboard', ['images'])
     }
 }
 </script>

@@ -7,9 +7,11 @@ import user from '@/modules/user/store'
 import local from '@/modules/local/store'
 
 import dashboard from '@/modules/dashboard/store'
+import notification from '@/modules/notification/store'
 
 import task from '@/modules/task/store'
 import device from '@/modules/device/store'
+
 
 // A Vuex instance is created by combining the state, mutations, actions,
 // and getters.
@@ -20,6 +22,7 @@ export default new Vuex.Store({
     task,
     device,
     dashboard,
+    notification,
     local
   }
   // plugins: [createPersistedState({

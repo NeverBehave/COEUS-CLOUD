@@ -1,15 +1,15 @@
 <template>
-    <el-card shadow="hover" class="device-card">
+    <el-card shadow="hover">
         <div slot="header">
             <span>素材总数</span>
-            <el-button style="float: right; padding: 3px 0; font-size:15px" type="text">{{ MaterialNumber }}</el-button>
+            <el-button style="float: right; padding: 3px 0; font-size:15px" type="text">{{ resourceNum }}</el-button>
         </div>
         <div class="box">
             <font-awesome-icon
                 class="left"
                 icon="check-circle"
             />
-            <span class="font">{{ PassedMaterialNumber }}</span>
+            <span class="font">{{ passedResourceNum }}</span>
         </div>
         <el-divider></el-divider>
         <div class="card-down">
@@ -22,22 +22,17 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
-    data() {
-        return {
-            MaterialNumber: 100,
-            PassedMaterialNumber: 92
-        }
+    computed: {
+        ...mapGetters('dashboard', ['resourceNum', 'passedResourceNum'])
     }
 }
 </script>
 
 
 <style lang="sass" scoped>
-// .device-card
-//     border-color: red
-//     border-width: 3px
-
 .card-down
     text-align: center
 </style>

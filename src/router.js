@@ -7,6 +7,7 @@ import MainLayout from '@/layouts/main'
 import LandingRouter from '@/modules/landing/router'
 import AuthRouter from '@/modules/auth/router'
 import DashboardRouter from '@/modules/dashboard/router'
+import NotificationRouter from '@/modules/notification/router'
 
 import DeviceRouter from '@/modules/device/router'
 import MaterialRouter from '@/modules/material/router'
@@ -35,6 +36,7 @@ export default new Router({
         ...DeviceRouter,
         ...MaterialRouter,
         ...TaskRouter,
+        ...NotificationRouter,
         ...UserRouter
       ]
     },

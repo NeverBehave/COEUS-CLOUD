@@ -36,6 +36,8 @@ import { Container,
   MessageBox, // SERVICES
   Message,
   Loading,
+  Table,
+  TableColumn,
   Notification } from 'element-ui'
 
 Vue.use(Container)
@@ -90,6 +92,9 @@ Vue.use(Dialog)
 
 Vue.use(Image)
 Vue.use(Loading.directive)
+
+Vue.use(Table)
+Vue.use(TableColumn)
 
 Vue.prototype.$loading = Loading.service
 Vue.prototype.$msgbox = MessageBox

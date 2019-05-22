@@ -27,7 +27,7 @@ import Footer from '@/components/Footer'
 import { mapGetters } from 'vuex'
 
 export default {
-  name: 'initLayout',
+  name: 'mainLayout',
   components: {
     Footer,
     Header,
@@ -49,6 +49,10 @@ export default {
     }
   },
   mounted () {
+    // @TODO check Login when dashboard
+    // if (!this.isLogin) {
+    //     this.$router.push({ name: 'Login' })
+    // }
     if (window.innerWidth < 767) {
       this.tiggerHeadbar()
     }

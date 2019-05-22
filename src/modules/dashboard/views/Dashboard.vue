@@ -103,6 +103,8 @@ import TaskUsage from '../components/Cards/TaskUsage'
 
 import Carousel from '../components/Carousel'
 
+import { mapActions } from 'vuex'
+
 export default {
   name: 'Dashboard',
   components: {
@@ -130,8 +132,21 @@ export default {
             md: 16,
             lg: 8,
             xl: 8
-        }
+        },
+        loading: this.$loading({ fullscreen: true })
       }
+  },
+  methods: {
+      ...mapActions('dashboard', ['updateStatus'])
+  },
+  mounted() {
+      this.updateStatus().then(res => {
+          // Do Nothing
+      }).catch(err => {
+          this.$message.error(err.response.data.msg)
+      }).finally(() => {
+          this.loading.close()
+      })
   }
 }
 </script>

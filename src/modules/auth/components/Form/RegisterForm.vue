@@ -93,7 +93,6 @@
 </template>
 
 <script>
-import { register } from '@/api/auth'
 import { mapActions } from 'vuex'
 import phone from 'phone'
 
@@ -138,20 +137,20 @@ export default {
 
   },
   methods: {
-    async registerUser () {
+    ...mapActions('auth', ['register']),
+    registerUser () {
       this.isLoading = true
       this.$refs.registerForm.validate(vaild => {
         if (vaild) {
           const postBody = this.form
 
-          return register(postBody).then(() => {
+          return this.register(postBody).then(() => {
             this.$notify({
               title: '注册成功',
               message: '即将重定向到登录页面',
               type: 'success'
             })
             setTimeout(() => this.$router.push({ name: 'Login' }), 2000)
-            this.isLoading = false
           }).catch(err => {
             const { data } = err.response
 
@@ -161,11 +160,10 @@ export default {
               type: 'error'
             })
 
-            this.isLoading = false
           })
         }
+      }).finally(() => {
         this.isLoading = false
-        return false
       })
     },
     validatePhone (rule, value, callback) {
