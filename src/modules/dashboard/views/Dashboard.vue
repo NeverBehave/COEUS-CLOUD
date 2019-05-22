@@ -117,36 +117,36 @@ export default {
     MaterialUsage,
     TaskUsage
   },
-  data() {
-      return {
-        row1: {
-            xs: 24,
-            sm: 24,
-            md: 12,
-            lg: 6,
-            xl: 6
-        },
-        row2: {
-            xs: 24,
-            sm: 24,
-            md: 16,
-            lg: 8,
-            xl: 8
-        },
-        loading: this.$loading({ fullscreen: true })
-      }
+  data () {
+    return {
+      row1: {
+        xs: 24,
+        sm: 24,
+        md: 12,
+        lg: 6,
+        xl: 6
+      },
+      row2: {
+        xs: 24,
+        sm: 24,
+        md: 16,
+        lg: 8,
+        xl: 8
+      },
+      loading: this.$loading({ fullscreen: true })
+    }
   },
   methods: {
-      ...mapActions('dashboard', ['updateStatus'])
+    ...mapActions('dashboard', ['updateStatus'])
   },
-  mounted() {
-      this.updateStatus().then(res => {
-          // Do Nothing
-      }).catch(err => {
-          this.$message.error(err.response.data.msg)
-      }).finally(() => {
-          this.loading.close()
-      })
+  mounted () {
+    this.updateStatus().then(res => {
+      // Do Nothing
+    }).catch(err => {
+      this.$message.error(err.response.data.msg)
+    }).finally(() => {
+      this.loading.close()
+    })
   }
 }
 </script>

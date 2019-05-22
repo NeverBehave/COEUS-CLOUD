@@ -1,5 +1,5 @@
 export default {
-    notification(state, content) {
-        state.content = content
-    }
+  notification (state, content) {
+    state.content = content
+  }
 }

@@ -8,5 +8,8 @@ export default {
   }, {
     value: '定时播放',
     label: '定时播放'
-  }]
+  }],
+  tasks: [
+
+  ]
 }

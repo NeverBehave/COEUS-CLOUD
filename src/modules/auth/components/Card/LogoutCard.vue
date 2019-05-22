@@ -1,18 +1,18 @@
 <template>
-    <div id="login-model">
+    <div id="logout-model">
         <el-card>
             <img src="@/assets/logo.png" alt="logo" class="logo">
             <h3 class="center">
                 Coeus云端平台
             </h3>
-            <LoginForm/>
+            <p>您已安全登出系统</p>
         </el-card>
         <div id="form-footer">
             <router-link
                 id="form-footer__left"
-                :to="{ name: 'Register' }"
+                :to="{ name: 'Login' }"
             >
-                注册账户
+                登陆
             </router-link>
             <router-link
                 id="form-footer__right"
@@ -25,7 +25,7 @@
 </template>
 
 <style lang="sass">
-#login-model
+#logout-model
     margin-top: 15vh
     height: 100px
 
@@ -37,11 +37,21 @@
 </style>
 
 <script>
-import LoginForm from '../Form/LoginForm'
+import { mapActions } from 'vuex'
+
 export default {
-  name: 'LoginCard',
-  components: {
-    LoginForm
+  name: 'LogoutCard',
+  mounted () {
+    this.logout().then(res => {
+
+    }).catch(err => {
+
+    }).finally(() => {
+
+    })
+  },
+  methods: {
+    ...mapActions('auth', ['logout'])
   }
 }
 </script>

@@ -159,7 +159,6 @@ export default {
               message: data.msg,
               type: 'error'
             })
-
           })
         }
       }).finally(() => {

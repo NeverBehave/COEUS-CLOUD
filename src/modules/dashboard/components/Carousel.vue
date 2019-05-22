@@ -1,9 +1,9 @@
 <template>
   <el-carousel>
     <el-carousel-item v-for="image in images" :key="image">
-        <el-image 
+        <el-image
         style="width: 100%"
-        fits="cover" 
+        fits="cover"
         :src="image"></el-image>
     </el-carousel-item>
   </el-carousel>
@@ -13,12 +13,11 @@
 import { mapGetters } from 'vuex'
 
 export default {
-    computed: {
-        ...mapGetters('dashboard', ['images'])
-    }
+  computed: {
+    ...mapGetters('dashboard', ['images'])
+  }
 }
 </script>
-
 
 <style lang="sass">
 .el-carousel__item:nth-child(2n)

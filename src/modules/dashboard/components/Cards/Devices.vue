@@ -25,12 +25,11 @@
 import { mapGetters } from 'vuex'
 
 export default {
-    computed: {
-        ...mapGetters('dashboard', ['deviceNum', 'onlineDeviceNum'])
-    }
+  computed: {
+    ...mapGetters('dashboard', ['deviceNum', 'onlineDeviceNum'])
+  }
 }
 </script>
-
 
 <style lang="sass" scoped>
 .card-down

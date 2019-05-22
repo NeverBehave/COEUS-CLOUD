@@ -5,10 +5,10 @@
         width="30%"
         center>
         <span>如果你不清楚如何使用Cron设定执行时间，可以查阅
-            <a href="http://www.bejson.com/othertools/cron/">此教程</a>
+            <el-link href="http://www.bejson.com/othertools/cron/">此教程</el-link>
         </span>
         <span slot="footer" class="dialog-footer">
-            <el-button type="primary" @click="helpDialog = false">确 定</el-button>
+            <el-button type="primary" @click="close">确 定</el-button>
         </span>
     </el-dialog>
 </template>
@@ -19,6 +19,11 @@ export default {
     helpDialog: {
       type: Boolean,
       required: true
+    }
+  },
+  methods: {
+    close () {
+      this.$emit('update:helpDialog', false)
     }
   }
 }

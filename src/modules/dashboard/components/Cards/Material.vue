@@ -25,12 +25,11 @@
 import { mapGetters } from 'vuex'
 
 export default {
-    computed: {
-        ...mapGetters('dashboard', ['resourceNum', 'passedResourceNum'])
-    }
+  computed: {
+    ...mapGetters('dashboard', ['resourceNum', 'passedResourceNum'])
+  }
 }
 </script>
-
 
 <style lang="sass" scoped>
 .card-down

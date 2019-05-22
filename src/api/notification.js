@@ -3,10 +3,9 @@ import axios from '@/config/axios'
 /*
 {"rows":[{"content":"Coeus云端系统于2019.4.20日预上线试行，云端系统功能包括素材上传，素材下载，定时执行任务，联机操控等功能。","createBy":"1086452872528285697","createTime":"2019-03-14 13:25:47","enable":"1","id":"1106063852694441985","infoSources":"","keyword":"","noticeTitle":"Coeus云端系统正式上线","noticeType":"1","readerTimes":"0","remark":"","sendTime":null,"sourcesUrl":"","status":"1","updateBy":"1086452872528285697","updateTime":"2019-03-14 13:25:47"},{"content":"由广州科伊斯数字技术有限公司自主研发的X65系列全息3D风扇屏正在火热售卖中，欢迎新老客户咨询购买。","createBy":"1086452872528285697","createTime":"2019-03-12 12:23:19","enable":"1","id":"1105323356254642178","infoSources":"","keyword":"","noticeTitle":"Coeus X65热卖中","noticeType":"1","readerTimes":"0","remark":"","sendTime":null,"sourcesUrl":"","status":"1","updateBy":"1086452872528285697","updateTime":"2019-03-12 12:23:19"},{"content":"由广州科伊斯数字技术有限公司自主研发的X65系列全息3D风扇屏正在火热售卖中，欢迎新老客户咨询购买。","createBy":"1086452872528285697","createTime":"2019-03-12 12:23:19","enable":"1","id":"1105323356254642177","infoSources":"","keyword":"","noticeTitle":"Coeus X65热卖中","noticeType":"1","readerTimes":"0","remark":"","sendTime":null,"sourcesUrl":"","status":"1","updateBy":"1086452872528285697","updateTime":"2019-03-12 12:23:19"},{"content":"Coeus云端智能远控系统将于2019-4-22，下午5时许进行系统维护更新，带来的不便敬请谅解。","createBy":"1086452872528285697","createTime":"2019-03-12 12:22:49","enable":"1","id":"1105323229997703169","infoSources":"","keyword":"","noticeTitle":"系统维护升级通知","noticeType":"1","readerTimes":"0","remark":"","sendTime":null,"sourcesUrl":"","status":"1","updateBy":"1086452872528285697","updateTime":"2019-03-12 12:22:49"},{"content":"Coeus云端系统旨在为用户提供智能控制体验，请勿通过系统进行违反国家法律法规的操作，如违反操作本公司保留追究其法律责任的权利。","createBy":"1086452872528285697","createTime":"2019-03-12 12:20:43","enable":"1","id":"1105322703486722050","infoSources":"","keyword":"","noticeTitle":"注意事项","noticeType":"1","readerTimes":"0","remark":"","sendTime":null,"sourcesUrl":"","status":"1","updateBy":"1086452872528285697","updateTime":"2019-03-12 12:20:43"},{"content":"无全息，不未来","createBy":"1086452872528285697","createTime":"2019-03-12 11:20:50","enable":"1","id":"1105307632098353154","infoSources":"string","keyword":"","noticeTitle":"无全息，不未来","noticeType":"","readerTimes":"0","remark":"string","sendTime":"2019-03-12 10:30:57","sourcesUrl":"string","status":"0","updateBy":"1086452872528285697","updateTime":"2019-03-12 11:20:50"}],"current":"1","size":"10","pages":"1","total":"6","code":"200","msg":"请求成功","timestamp":"1558495756885"}
 */
-export async function notification() {
-    return axios({
-        url: '/notice/read/list',
-        method: 'put'
-      })
+export async function notification () {
+  return axios({
+    url: '/notice/read/list',
+    method: 'put'
+  })
 }
-

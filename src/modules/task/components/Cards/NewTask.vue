@@ -5,7 +5,7 @@
     <el-button style="float: right; padding: 3px 0" type="text" @click="helpDialog = true">需要帮助？</el-button>
   </div>
   <NewTaskForm/>
-  <NewTaskHelp :helpDialog="helpDialog"/>
+  <NewTaskHelp :helpDialog.sync="helpDialog"/>
 </el-card>
 </template>
 

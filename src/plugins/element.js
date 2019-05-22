@@ -33,6 +33,7 @@ import { Container,
   TabPane,
   Dialog,
   Image,
+  Link,
   MessageBox, // SERVICES
   Message,
   Loading,
@@ -95,6 +96,8 @@ Vue.use(Loading.directive)
 
 Vue.use(Table)
 Vue.use(TableColumn)
+
+Vue.use(Link)
 
 Vue.prototype.$loading = Loading.service
 Vue.prototype.$msgbox = MessageBox

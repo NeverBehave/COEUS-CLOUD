@@ -1,10 +1,11 @@
 <template>
-    <el-badge :value="notificationNum" :hidden="isHidden" class="item">
-            <router-link :to="{name: 'NotificationList'}">
+    <el-badge :value="notificationNum"
+              :hidden="isHidden"
+              @click.native="toNotification"
+              class="item">
             <font-awesome-icon
             icon="bell"
             />
-        </router-link>
     </el-badge>
 </template>
 
@@ -24,13 +25,16 @@ export default {
     }
   },
   methods: {
-      ...mapActions('notification', ['updateNotification'])
+    ...mapActions('notification', ['updateNotification']),
+    toNotification () {
+      this.$router.push({ name: 'NotificationList' })
+    }
   },
-  mounted() {
-      this.updateNotification().catch(err => {
-          console.log(err.data)
-          this.$message.error('通知更新失败！')
-      })
+  mounted () {
+    this.updateNotification().catch(err => {
+      console.log(err.data)
+      this.$message.error('通知更新失败！')
+    })
   }
 }
 </script>

@@ -23,15 +23,14 @@
 
 <script>
 export default {
-    data() {
-        return {
-            ShareNumber: 10,
-            CurrentSharing: 4
-        }
+  data () {
+    return {
+      ShareNumber: 10,
+      CurrentSharing: 4
     }
+  }
 }
 </script>
-
 
 <style lang="sass" scoped>
 .card-down

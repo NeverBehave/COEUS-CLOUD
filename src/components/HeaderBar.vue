@@ -20,14 +20,14 @@
                 </span>
             </div>
             <el-dropdown-menu slot="dropdown">
-                <el-dropdown-item
-                    :to="{name: 'UserInfo'}"
-                >
-                    <font-awesome-icon
-                        icon="user"
-                    />
-                    用户信息
-                </el-dropdown-item>
+                    <el-dropdown-item
+                        @click.native="userInfo"
+                    >
+                        <font-awesome-icon
+                            icon="user"
+                        />
+                        用户信息
+                    </el-dropdown-item>
                 <el-dropdown-item
                 >
                     <font-awesome-icon
@@ -36,7 +36,7 @@
                     帮助
                 </el-dropdown-item>
                 <el-dropdown-item
-                    @click.native="logoutUser"
+                    @click.native="logout"
                     divided
                 >
                     <font-awesome-icon
@@ -59,10 +59,11 @@ export default {
   },
   computed: { ...mapGetters('user', ['profile']) },
   methods: {
-    ...mapActions('auth', ['logout']),
-    logoutUser () {
-      this.logout()
-      this.$router.push({ name: 'Login' })
+    logout () {
+      this.$router.push({ name: 'Logout' })
+    },
+    userInfo () {
+      this.$router.push({ name: 'UserInfo' })
     }
   }
 }

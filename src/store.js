@@ -12,7 +12,6 @@ import notification from '@/modules/notification/store'
 import task from '@/modules/task/store'
 import device from '@/modules/device/store'
 
-
 // A Vuex instance is created by combining the state, mutations, actions,
 // and getters.
 export default new Vuex.Store({
