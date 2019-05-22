@@ -143,6 +143,7 @@ export default {
     this.updateStatus().then(res => {
       // Do Nothing
     }).catch(err => {
+      console.log(err)
       this.$message.error(err.response.data.msg)
     }).finally(() => {
       this.loading.close()

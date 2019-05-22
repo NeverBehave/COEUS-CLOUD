@@ -21,7 +21,7 @@
             </div>
             <el-dropdown-menu slot="dropdown">
                     <el-dropdown-item
-                        @click="userInfo"
+                        @click.native="userInfo"
                     >
                         <font-awesome-icon
                             icon="user"
@@ -36,7 +36,7 @@
                     帮助
                 </el-dropdown-item>
                 <el-dropdown-item
-                    @click="logout"
+                    @click.native="logout"
                     divided
                 >
                     <font-awesome-icon

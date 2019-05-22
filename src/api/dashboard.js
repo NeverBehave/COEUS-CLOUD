@@ -6,6 +6,7 @@ import axios from '@/config/axios'
 export async function status () {
   return axios({
     url: '/cloud/device/read/index/list',
-    method: 'put'
+    method: 'put',
+    data: {}
   })
 }

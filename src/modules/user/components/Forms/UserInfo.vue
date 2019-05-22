@@ -40,47 +40,46 @@
 import { mapGetters, mapActions } from 'vuex'
 
 export default {
-    data() {
-        return {
-            newPassword: '',
-            newPhone: '',
-            newUsername: '',
-        }
-    },
-    mounted() {
-        this.newPassword = this.password
-        this.newUsername = this.username
-        this.newPhone = this.phone
-    },
-    computed: {
-        ...mapGetters('user', ['username', 'phone', 'email', 'address', 'userType'])
-    },
-    methods: {
-        ...mapGetters('user', ['updateUsername']),
-        changeUsername() {
-            if (this.username === this.newUsername) {
-                this.$message({
-                    message: '新旧用户名一致',
-                    type: 'warning'
-                })
-            } else {
-                 this.updateUsername(this.newUsername).then(res => [
-                     this.$message({
-                         message: '更新成功',
-                         type: 'success'
-                     })
-                 ]).catch(err => {
-                     this.$message.error('更新失败，请重试')
-                 })
-            }
-        },
-        changePhoneNumber() {
-
-        },
-        changePassword() {
-
-        }
+  data () {
+    return {
+      newPassword: '',
+      newPhone: '',
+      newUsername: ''
     }
+  },
+  mounted () {
+    this.newPassword = this.password
+    this.newUsername = this.username
+    this.newPhone = this.phone
+  },
+  computed: {
+    ...mapGetters('user', ['username', 'phone', 'email', 'address', 'userType'])
+  },
+  methods: {
+    ...mapGetters('user', ['updateUsername']),
+    changeUsername () {
+      if (this.username === this.newUsername) {
+        this.$message({
+          message: '新旧用户名一致',
+          type: 'warning'
+        })
+      } else {
+        this.updateUsername(this.newUsername).then(res => [
+          this.$message({
+            message: '更新成功',
+            type: 'success'
+          })
+        ]).catch(err => {
+          this.$message.error('更新失败，请重试')
+        })
+      }
+    },
+    changePhoneNumber () {
+
+    },
+    changePassword () {
+
+    }
+  }
 }
 </script>
-

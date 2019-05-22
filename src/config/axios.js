@@ -1,9 +1,7 @@
 import axios from 'axios'
 import store from '@/store'
 
-const dev = process.env.NODE_ENV || 'development'
-// In order to make cookie works, we must have a dot in the domain (security issue)
-const API_ENDPOINT = dev === 'development' ? 'http://127.0.0.1:8010/proxy' : '/api/'
+const API_ENDPOINT = '/api/'
 
 const service = axios.create({
   baseURL: API_ENDPOINT,
@@ -15,7 +13,7 @@ service.interceptors.request.use(config => {
 //   if (userToken) {
 //     config.headers.Authorization = `Bearer ${userToken}`
 //   }
-
+  config.headers.credentials = 'include'
   return config
 }, error => {
   /* eslint-disable no-console */

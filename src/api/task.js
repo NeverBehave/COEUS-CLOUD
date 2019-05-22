@@ -3,19 +3,19 @@ import axios from '@/config/axios'
 /*
 {"deviceNo":"","taskName":"aaa","remark":"111","status":"0","cron":"* * * * * ?","orderNum":"3","value":["1"],"enable":1}
 */
-export async function newTask () {
+export async function newTask (data) {
   return axios({
-    url: '/notice/read/list',
+    url: '/userTask',
     method: 'post',
     data: {
-      deviceNo: '',
-      taskName: '',
-      remark: '',
-      status: '',
-      cron: '',
-      orderNum: '',
-      value: [],
-      enable: 1
+      deviceNo: data.deviceName,
+      taskName: data.taskName,
+      remark: data.description,
+      status: data.enable,
+      cron: data.cron,
+      orderNum: data.type,
+      value: [''],
+      enable: 1 // ?
     }
   })
 }

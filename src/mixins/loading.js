@@ -1,7 +1,7 @@
 export default {
-    data () {
-        return {
-            loading: this.$loading({ fullscreen: true })
-        }
-    }   
+  data () {
+    return {
+      loading: this.$loading({ fullscreen: true })
+    }
+  }
 }

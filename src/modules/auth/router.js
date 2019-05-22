@@ -10,7 +10,7 @@ export default [{
   }, {
     path: '/logout',
     name: 'Logout',
-    component: () => import(/* webpackChunkName: "Login" */ './views/Logout')
+    component: () => import(/* webpackChunkName: "Logout" */ './views/Logout')
   }, {
     path: '/register',
     name: 'Register',

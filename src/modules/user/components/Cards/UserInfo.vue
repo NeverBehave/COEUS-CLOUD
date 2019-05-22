@@ -12,8 +12,8 @@
 import UserInfoForm from '../Forms/UserInfo'
 
 export default {
-    components: {
-        UserInfoForm
-    }
+  components: {
+    UserInfoForm
+  }
 }
 </script>

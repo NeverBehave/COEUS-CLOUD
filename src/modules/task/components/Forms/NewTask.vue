@@ -129,35 +129,31 @@ export default {
   mounted () {
   },
   methods: {
-    async submitTask () {
+    ...mapActions('task', ['newTask']),
+    submitTask () {
       this.isLoading = true
       this.$refs.loginForm.validate(vaild => {
         if (vaild) {
-          return loginAPI(this.form).then(data => {
+          return this.newTask(this.form).then(data => {
             this.$notify({
               title: '提交成功',
               message: '您可以继续提交新任务',
               type: 'success'
             })
             setTimeout(() => this.$router.push({ name: 'Dashboard' }), 2000)
-            this.isLoading = false
           }).catch(err => {
             const { data } = err.response
             const code = data.code
 
-            if (code === '303') {
-              this.$notify({
-                title: '验证失败',
-                message: data.msg,
-                type: 'error'
-              })
-            }
-
+            this.$notify({
+              title: '验证失败',
+              message: data.msg,
+              type: 'error'
+            })
+          }).finally(() => {
             this.isLoading = false
           })
         }
-        this.isLoading = false
-        return false
       })
     },
     changeCron (val) {
