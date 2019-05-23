@@ -9,11 +9,8 @@ const service = axios.create({
 })
 
 service.interceptors.request.use(config => {
-//   const userToken = store.getters['user/token']
-//   if (userToken) {
-//     config.headers.Authorization = `Bearer ${userToken}`
-//   }
   config.headers.credentials = 'include'
+
   return config
 }, error => {
   /* eslint-disable no-console */
@@ -27,10 +24,16 @@ service.interceptors.response.use((response) => {
       // Login issue
       store.commit('auth/isLogin', false)
     }
-    const err = new Error('code check failed')
+    const err = new Error('Code Check Failed')
     err.response = response
     throw err
+  } else {
+    return response
   }
+}, error => {
+    /* eslint-disable no-console */
+    console.log(error)
+    Promise.reject(error)
 })
 
 export default service

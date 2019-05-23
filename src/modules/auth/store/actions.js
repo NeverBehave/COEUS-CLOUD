@@ -7,6 +7,7 @@ export default {
   login ({ commit }, data) {
     return loginAPI(data).then(res => {
       commit('isLogin', true)
+      return res
     })
   },
   register ({}, data) {
@@ -15,12 +16,13 @@ export default {
   logout ({ commit }) {
     return logoutAPI().then(res => {
       commit('isLogin', false)
+      return res
     })
   },
   isLogin ({ commit }) {
     return getMe().then(res => {
       commit('isLogin', true)
-      return res.data
+      return res
     }).catch(err => {
       commit('isLogin', false)
       throw err
