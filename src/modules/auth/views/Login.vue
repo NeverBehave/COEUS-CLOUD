@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import loading from '@/mixins/loading'
+import fullscreen from '@/mixins/loading/fullscreen'
 import LoginCard from '../components/Card/LoginCard'
 import { mapActions } from 'vuex'
 
@@ -14,7 +14,7 @@ export default {
   components: {
     LoginCard
   },
-  mixins: [loading],
+  mixins: [fullscreen],
   methods: {
     ...mapActions('auth', ['isLogin'])
   },
@@ -41,7 +41,7 @@ export default {
         })
       }
     }).finally(() => {
-      this.loading.close()
+      this.finishLoading()
     })
   }
 }

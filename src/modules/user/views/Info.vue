@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import loading from '@/mixins/loading'
+import fullscreen from '@/mixins/loading/fullscreen'
 import UserInfoCard from '../components/Cards/UserInfo'
 import { mapActions } from 'vuex'
 
@@ -15,7 +15,7 @@ export default {
   components: {
     UserInfoCard
   },
-  mixins: [loading],
+  mixins: [fullscreen],
   methods: {
     ...mapActions('user', ['getMe'])
   },
@@ -23,7 +23,7 @@ export default {
     this.getMe().then(res => {
       this.$message('信息获取成功！')
     }).catch(err => {
-      let { data } = err.response
+      let { data } = err.data
       this.$message.error(data.msg)
     }).finally(() => {
       this.loading.close()

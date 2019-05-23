@@ -37,7 +37,7 @@
             </el-form-item>
             <el-form-item class="center">
                 <el-button
-                    :loading="isLoading"
+                    :loading="submitting"
                     type="primary"
                     @click="loginUser"
                 >
@@ -49,6 +49,7 @@
 </template>
 
 <script>
+import submit from '@/mixins/loading/submit'
 import { mapActions } from 'vuex'
 
 export default {
@@ -70,6 +71,7 @@ export default {
       isLoading: false
     }
   },
+  mixins: [submit],
   computed: {
 
   },
@@ -78,7 +80,7 @@ export default {
   methods: {
     ...mapActions('auth', ['login']),
     loginUser () {
-      this.isLoading = true
+      this.startSubmit()
       this.$refs.loginForm.validate(vaild => {
         if (vaild) {
           return this.login(this.form).then(data => {
@@ -97,7 +99,7 @@ export default {
               type: 'error'
             })
           }).finally(() => {
-            this.isLoading = false
+            this.endSubmit()
           })
         }
       })

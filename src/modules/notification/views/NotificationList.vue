@@ -3,17 +3,20 @@
     <el-col>
       <el-table
         :data="notifications"
+        :default-sort = "{prop: 'createTime', order: 'descending'}"
         style="width: 100%">
         <el-table-column
-          prop="noticetitle"
-          label="标题">
+          prop="noticeTitle"
+          label="标题"
+          sortable>
         </el-table-column>
         <el-table-column
-          prop="createdBy"
-          label="发布日期">
+          prop="createTime"
+          label="发布日期"
+          sortable>
         </el-table-column>
         <el-table-column
-          prop="createdBy"
+          prop="content"
           label="详情">
         </el-table-column>
       </el-table>

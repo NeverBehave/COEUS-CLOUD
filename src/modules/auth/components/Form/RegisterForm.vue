@@ -81,7 +81,7 @@
             </el-form-item>
             <el-form-item class="center">
                 <el-button
-                    :loading="isLoading"
+                    :loading="submitting"
                     type="primary"
                     @click="registerUser"
                 >
@@ -93,6 +93,7 @@
 </template>
 
 <script>
+import submit from '@/mixins/loading/submit'
 import { mapActions } from 'vuex'
 import phone from 'phone'
 
@@ -107,6 +108,7 @@ export default {
         phone: '',
         type: ''
       },
+      mixins: [submit],
       rules: {
         email: [
           { required: true, message: '请输入邮箱' },
@@ -130,7 +132,6 @@ export default {
           { required: true, message: '请选择类型' }
         ]
       },
-      isLoading: false
     }
   },
   mounted () {
@@ -139,7 +140,7 @@ export default {
   methods: {
     ...mapActions('auth', ['register']),
     registerUser () {
-      this.isLoading = true
+      this.startSubmit()
       this.$refs.registerForm.validate(vaild => {
         if (vaild) {
           const postBody = this.form
@@ -160,7 +161,7 @@ export default {
               type: 'error'
             })
           }).finally(() => {
-            this.isLoading = false
+            this.endSubmit()
           })
         }
       })

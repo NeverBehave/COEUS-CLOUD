@@ -1,10 +1,10 @@
 import { getMe as UserAPI,
-  updateUsername as updateUsernameAPI } from '@/api/auth'
+         updateUsername as updateUsernameAPI } from '@/api/user'
 
 export default {
   getMe ({ commit }) {
     return UserAPI().then(res => {
-      let { data } = res.response
+      let { data } = res.data
       commit('username', data.account)
       commit('address', data.address)
       commit('email', data.email)
@@ -12,6 +12,7 @@ export default {
       commit('phone', data.phone)
       commit('remark', data.remark)
       commit('userType', data.userType)
+      return res
     })
   },
   updateUsername ({}, newName) {
