@@ -1,6 +1,6 @@
 export default {
   id: '',
-  username: '',
+  username: 'Unknown',
   address: '',
   email: '',
   phone: '',

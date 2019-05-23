@@ -26,7 +26,8 @@ export async function newTask (data) {
 export async function taskList () {
   return axios({
     url: '/userTask/read/tasks',
-    method: 'put'
+    method: 'put',
+    data: {}
   })
 }
 

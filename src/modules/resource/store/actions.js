@@ -6,7 +6,6 @@ export default {
   updateTree ({ commit }) {
     return resourceGroup().then(res => {
       let rows = res.data.rows
-      console.log(rows)
       commit('tree', listToTree(rows))
     })
   },

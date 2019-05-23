@@ -1,3 +1,4 @@
 export default {
-  getTypes: state => state.types
+  getTypes: state => state.types,
+  tasks: state => state.tasks
 }
