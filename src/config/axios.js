@@ -25,15 +25,16 @@ service.interceptors.response.use((response) => {
       store.commit('auth/isLogin', false)
     }
     const err = new Error('Code Check Failed')
-    err.response = response
+    err.data = response.data
+
     throw err
   } else {
     return response
   }
 }, error => {
-    /* eslint-disable no-console */
-    console.log(error)
-    Promise.reject(error)
+  /* eslint-disable no-console */
+  console.log(error)
+  Promise.reject(error)
 })
 
 export default service

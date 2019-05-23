@@ -51,6 +51,19 @@ export async function updateResourceGroup (id, data) {
   })
 }
 
+export async function createResourceGroup ({ name, parentId = '' }) {
+  return axios({
+    url: '/cloud/resourceGroup/update',
+    method: 'post',
+    data: {
+      enable: 1,
+      id: '',
+      name,
+      parentId
+    }
+  })
+}
+
 /*
 {"data":{"createBy":"1130294111627264002","createTime":"2019-05-22 15:17:30","enable":"1","id":"1131096731229089793","keyword":"","name":"aaa","parentId":null,"path":"","remark":"0,","uid":"1130294111627264002","updateBy":"1130294111627264002","updateTime":"2019-05-22 15:17:30"},"code":"200","msg":"请求成功","timestamp":"1558509504640"}
 */
@@ -81,8 +94,7 @@ export async function resourceGroup (data) {
   return axios({
     url: '/cloud/resourceGroup/read/list',
     method: 'put',
-    data: {
-    }
+    data: {}
   })
 }
 
@@ -93,8 +105,6 @@ export async function uploadResource (data) {
   return axios({
     url: '/cloud/resource/uploadFile',
     method: 'post',
-    data: {
-
-    }
+    data: {}
   })
 }

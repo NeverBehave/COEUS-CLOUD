@@ -1,3 +1,5 @@
 export default {
-  getDevices: state => state.devices
+  onlineDevices: state => [],
+  devices: state => state.devices,
+  versions: state => state.versions
 }

@@ -34,10 +34,12 @@ import { Container,
   Dialog,
   Image,
   Link,
+  Switch,
   MessageBox, // SERVICES
   Message,
   Loading,
   Table,
+  Tree,
   TableColumn,
   Notification } from 'element-ui'
 
@@ -98,6 +100,10 @@ Vue.use(Table)
 Vue.use(TableColumn)
 
 Vue.use(Link)
+
+Vue.use(Switch)
+
+Vue.use(Tree)
 
 Vue.prototype.$loading = Loading.service
 Vue.prototype.$msgbox = MessageBox

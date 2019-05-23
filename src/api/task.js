@@ -8,7 +8,7 @@ export async function newTask (data) {
     url: '/userTask',
     method: 'post',
     data: {
-      deviceNo: data.deviceName,
+      deviceNo: data.deviceID,
       taskName: data.taskName,
       remark: data.description,
       status: data.enable,

@@ -27,7 +27,7 @@ export default {
       })
       setTimeout(() => this.$router.push({ name: 'Dashboard' }), 2000)
     }).catch(err => {
-      let { data } = err.response
+      let { data } = err
       if (data.code === '401') {
         this.$message({
           message: '登陆状态已失效，请重新登陆',

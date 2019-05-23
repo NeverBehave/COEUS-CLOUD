@@ -1,5 +1,5 @@
 import { getMe as UserAPI,
-         updateUsername as updateUsernameAPI } from '@/api/user'
+  updateUsername as updateUsernameAPI } from '@/api/user'
 
 export default {
   getMe ({ commit }) {

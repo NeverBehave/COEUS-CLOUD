@@ -10,7 +10,7 @@ import DashboardRouter from '@/modules/dashboard/router'
 import NotificationRouter from '@/modules/notification/router'
 
 import DeviceRouter from '@/modules/device/router'
-import MaterialRouter from '@/modules/material/router'
+import ResourceRouter from '@/modules/resource/router'
 import TaskRouter from '@/modules/task/router'
 import UserRouter from '@/modules/user/router'
 
@@ -34,7 +34,7 @@ export default new Router({
       children: [
         ...DashboardRouter,
         ...DeviceRouter,
-        ...MaterialRouter,
+        ...ResourceRouter,
         ...TaskRouter,
         ...NotificationRouter,
         ...UserRouter

@@ -49,10 +49,9 @@ export default {
     }
   },
   mounted () {
-    // @TODO check Login when dashboard
-    // if (!this.isLogin) {
-    //     this.$router.push({ name: 'Login' })
-    // }
+    if (!this.isLogin) {
+      this.$router.push({ name: 'Login' })
+    }
     if (window.innerWidth < 767) {
       this.tiggerHeadbar()
     }

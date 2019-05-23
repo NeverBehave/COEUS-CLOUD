@@ -13,27 +13,27 @@
 import { mapGetters, mapActions, mapMutations } from 'vuex'
 
 export default {
-    computed: {
-        ...mapGetters('user', {
-            getPhone: 'phone'
-        }),
-        phone: {
-            get() {
-                return this.getPhone
-            },
-            set(value) {
-                this.commitPhone(value)
-            }
-        }
-    },
-    methods: {
-        ...mapActions('user', ['updatePhone']),
-        ...mapMutations('user', {
-            commitPhone: 'phone'
-        }),
-        changePhoneNumber () {
-            this.$message.error('尚未实现')
-        }
+  computed: {
+    ...mapGetters('user', {
+      getPhone: 'phone'
+    }),
+    phone: {
+      get () {
+        return this.getPhone
+      },
+      set (value) {
+        this.commitPhone(value)
+      }
     }
+  },
+  methods: {
+    ...mapActions('user', ['updatePhone']),
+    ...mapMutations('user', {
+      commitPhone: 'phone'
+    }),
+    changePhoneNumber () {
+      this.$message.error('尚未实现')
+    }
+  }
 }
 </script>

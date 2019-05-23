@@ -131,7 +131,7 @@ export default {
         type: [
           { required: true, message: '请选择类型' }
         ]
-      },
+      }
     }
   },
   mounted () {
@@ -140,12 +140,12 @@ export default {
   methods: {
     ...mapActions('auth', ['register']),
     registerUser () {
-      this.startSubmit()
       this.$refs.registerForm.validate(vaild => {
         if (vaild) {
           const postBody = this.form
 
-          return this.register(postBody).then(res => {
+          this.startSubmit()
+          this.register(postBody).then(res => {
             this.$notify({
               title: '注册成功',
               message: '即将重定向到登录页面',
@@ -153,7 +153,7 @@ export default {
             })
             setTimeout(() => this.$router.push({ name: 'Login' }), 2000)
           }).catch(err => {
-            const { data } = err.response
+            const { data } = err
 
             this.$notify({
               title: '操作失败',

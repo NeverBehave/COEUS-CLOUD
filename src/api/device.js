@@ -20,10 +20,10 @@ export async function addDevice (data) {
     url: '/cloud/device/update',
     method: 'post',
     data: {
-      desc: 'aaa',
-      deviceNo: 'aa',
-      remark: '',
-      version: 'X65'
+      desc: data.password,
+      deviceNo: data.deviceID,
+      remark: data.description,
+      version: data.version
     }
   })
 }
@@ -52,6 +52,7 @@ export async function deleteDevice (ids) {
   })
 }
 
+// rows:[]
 export async function onlineDeviceList () {
   return axios({
     url: '/cloud/device/read/onlineList',

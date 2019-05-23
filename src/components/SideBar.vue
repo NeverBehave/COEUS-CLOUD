@@ -67,7 +67,7 @@
                 </template>
                 <el-menu-item-group>
                     <router-link
-                        :to="{'name': 'MaterialList'}"
+                        :to="{'name': 'ResourceList'}"
                     >
                         <el-menu-item index="2-1">
                             <font-awesome-icon
@@ -77,7 +77,7 @@
                         </el-menu-item>
                     </router-link>
                     <router-link
-                        :to="{'name': 'MaterialGroup'}"
+                        :to="{'name': 'ResourceGroup'}"
                     >
                         <el-menu-item index="2-2">
                             <font-awesome-icon

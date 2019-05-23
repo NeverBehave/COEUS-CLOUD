@@ -11,6 +11,7 @@ import notification from '@/modules/notification/store'
 
 import task from '@/modules/task/store'
 import device from '@/modules/device/store'
+import resource from '@/modules/resource/store'
 
 // A Vuex instance is created by combining the state, mutations, actions,
 // and getters.
@@ -22,6 +23,7 @@ export default new Vuex.Store({
     device,
     dashboard,
     notification,
+    resource,
     local
   }
   // plugins: [createPersistedState({

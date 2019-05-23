@@ -80,10 +80,10 @@ export default {
   methods: {
     ...mapActions('auth', ['login']),
     loginUser () {
-      this.startSubmit()
       this.$refs.loginForm.validate(vaild => {
         if (vaild) {
-          return this.login(this.form).then(data => {
+          this.startSubmit()
+          this.login(this.form).then(data => {
             this.$notify({
               title: '登陆成功',
               message: '即将重定向到面板',
@@ -92,7 +92,7 @@ export default {
 
             setTimeout(() => this.$router.push({ name: 'Dashboard' }), 2000)
           }).catch(err => {
-            let { data } = err.response
+            let { data } = err
             this.$notify({
               title: '操作失败',
               message: data.msg,

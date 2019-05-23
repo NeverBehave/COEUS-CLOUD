@@ -13,15 +13,15 @@
 import { mapGetters, mapActions, mapMutations } from 'vuex'
 
 export default {
-    data() {
-        return {
-            password: ''
-        }
-    },
-    methods: {
-        changePassword() {
-            this.$message.error('尚未实现')
-        }
+  data () {
+    return {
+      password: ''
     }
+  },
+  methods: {
+    changePassword () {
+      this.$message.error('尚未实现')
+    }
+  }
 }
 </script>

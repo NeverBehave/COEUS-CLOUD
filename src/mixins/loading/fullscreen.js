@@ -5,7 +5,7 @@ export default {
     }
   },
   methods: {
-    finishLoading() {
+    finishLoading () {
       this.loading.close()
     }
   }
