@@ -9,5 +9,6 @@ export default {
       value: 'X50',
       label: 'X50'
     }
-  ]
+  ],
+  onlineDevices: []
 }

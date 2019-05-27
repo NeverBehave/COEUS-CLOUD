@@ -1,12 +1,20 @@
 import { resourceGroup,
   deleteResourceGroup as deleteResourceGroupAPI,
-  createResourceGroup as createResourceGroupAPI } from '@/api/resource'
+  createResourceGroup as createResourceGroupAPI,
+  resourceList as resourceListAPI,
+  deleteResources as deleteResourcesAPI } from '@/api/resource'
 
 export default {
   updateTree ({ commit }) {
     return resourceGroup().then(res => {
       let rows = res.data.rows
       commit('tree', listToTree(rows))
+    })
+  },
+  resourceList ({ commit }, filter) {
+    return resourceListAPI(filter).then(res => {
+      commit('resources', res.data.rows)
+      return res
     })
   },
   deleteResourceGroup ({ dispatch }, id) {
@@ -16,11 +24,13 @@ export default {
     })
   },
   createResourceGroup ({ dispatch }, data) {
-    console.log(data)
     return createResourceGroupAPI(data).then(res => {
       dispatch('updateTree')
       return res
     })
+  },
+  deleteResources ({}, ids) {
+    return deleteResourcesAPI(ids)
   }
 }
 
@@ -36,9 +46,14 @@ function listToTree (list) {
   }
   for (i = 0; i < list.length; i += 1) {
     node = list[i]
-    if (node.parentId) { // 0, null, or what ever
+    if (node.parentId && node.parentId !== '0') { // 0, null, or what ever
       // if you have dangling branches check that map[node.parentId] exists
-      list[map[node.parentId]].children.push(node)
+      let n = map[node.parentId]
+      if (n) {
+        list[map[node.parentId]].children.push(node)
+      } else {
+        roots.push(node)
+      }
     } else {
       roots.push(node)
     }

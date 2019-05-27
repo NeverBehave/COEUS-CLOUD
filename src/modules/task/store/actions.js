@@ -1,5 +1,6 @@
 import { newTask as newTaskAPI,
-  taskList as taskListAPI } from '@/api/task'
+  taskList as taskListAPI,
+  deleteTasks as deleteTaskAPI } from '@/api/task'
 
 export default {
   newTask ({}, data) {
@@ -9,5 +10,8 @@ export default {
     return taskListAPI().then(res => {
       commit('taskList', res.data.rows)
     })
+  },
+  deleteTasks ({}, ids) {
+    return deleteTaskAPI(ids)
   }
 }

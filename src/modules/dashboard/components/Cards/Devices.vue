@@ -9,7 +9,7 @@
                 class="left"
                 icon="desktop"
             />
-            <span class="font">{{ onlineDeviceNum }}</span>
+            <span class="font">{{ onlineDevices.length }}</span>
         </div>
         <el-divider></el-divider>
         <div class="card-down">
@@ -22,11 +22,18 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 
 export default {
   computed: {
-    ...mapGetters('dashboard', ['deviceNum', 'onlineDeviceNum'])
+    ...mapGetters('dashboard', ['deviceNum']),
+    ...mapGetters('device', ['onlineDevices'])
+  },
+  methods: {
+    ...mapActions('device', ['updateOnlineDevices'])
+  },
+  mounted () {
+    this.updateOnlineDevices()
   }
 }
 </script>

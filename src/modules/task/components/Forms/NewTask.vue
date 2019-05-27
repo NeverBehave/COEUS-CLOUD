@@ -41,6 +41,23 @@
                     </el-option>
                 </el-select>
             </el-form-item>
+             <el-form-item
+                v-if="form.type === 3"
+                label="定时播放"
+                prop="play_num"
+                :rules="[
+                {
+                  required: true, message: '此项不能为空', trigger: 'blur'
+                }]"
+              >
+                <el-input-number
+                    v-model="form.play_num"
+                    :min="0"
+                    :max="255"
+                    label="定时播放"
+                    >
+                </el-input-number>
+              </el-form-item>
              <el-form-item prop="description" label="备注">
                 <el-input
                 type="textarea"
@@ -51,8 +68,15 @@
              </el-form-item>
              <el-form-item prop="cron" label="执行时间">
                  <el-popover v-model="cronPopover">
-                    <vueCron @change="changeCron" @close="cronPopover=false" i18n="en"></vueCron>
-                    <el-input slot="reference" @click="cronPopover=true" v-model="form.cron" placeholder="请输入定时策略"></el-input>
+                    <vueCron @change="changeCron"
+                             @close="cronPopover=false"
+                             i18n="cn"
+                    ></vueCron>
+                    <el-input slot="reference"
+                              @click="cronPopover=true"
+                              v-model="form.cron"
+                              placeholder="请输入定时策略"
+                    ></el-input>
                 </el-popover>
              </el-form-item>
              <el-form-item prop="description" label="是否启用">
@@ -99,6 +123,7 @@ export default {
     return {
       cronPopover: false,
       form: {
+        play_num: 0,
         deviceID: '',
         taskName: '',
         type: '',
@@ -112,7 +137,8 @@ export default {
           { min: 1, max: 20, message: '长度在 1 到 20 个字符', trigger: 'blur' }
         ],
         deviceID: [
-          { required: true, message: '请选择设备' }
+          // Ignored for now
+          // { required: true, message: '请选择设备' }
         ],
         type: [
           { required: true, message: '请选择类型' }
@@ -128,9 +154,15 @@ export default {
     ...mapGetters('task', ['getTypes'])
   },
   mounted () {
+    this.updateOnlineDevices().then(res => {
+      this.$message('在线设备获取成功')
+    }).catch(err => {
+      this.$message.error('在线设备信息获取失败')
+    })
   },
   methods: {
     ...mapActions('task', ['newTask']),
+    ...mapActions('device', ['updateOnlineDevices']),
     submitTask () {
       this.$refs.taskForm.validate(vaild => {
         this.startSubmit()
@@ -141,7 +173,6 @@ export default {
               message: '您可以继续提交新任务',
               type: 'success'
             })
-            setTimeout(() => this.$router.push({ name: 'Dashboard' }), 2000)
           }).catch(err => {
             const { data } = err
 

@@ -4,7 +4,7 @@
     :data="devices"
     tooltip-effect="dark"
     style="width: 100%"
-    height="400px"
+    min-height="400px"
     @selection-change="handleSelectionChange"
   >
     <el-table-column
@@ -27,6 +27,9 @@
       :filters="onlineFilters"
       :filter-method="filterHandler"
       >
+      <template slot-scope="scope">
+        <span>{{ valueHandler(scope.row.isOnline, onlineFilters) }}</span>
+      </template>
     </el-table-column>
      <el-table-column
       label="启动状态"
@@ -36,6 +39,9 @@
       :filters="enableFilters"
       :filter-method="filterHandler"
       >
+      <template slot-scope="scope">
+        <span>{{ valueHandler(scope.row.enable, enableFilters) }}</span>
+      </template>
     </el-table-column>
     <el-table-column
       label="播放状态"
@@ -45,11 +51,14 @@
       :filters="playStateFilters"
       :filter-method="filterHandler"
     >
+     <template slot-scope="scope">
+        <span>{{ valueHandler(scope.row.playState, playStateFilters) }}</span>
+      </template>
     </el-table-column>
     <el-table-column
       label="创建时间"
-      column-key="createdAt"
-      prop="createdAt"
+      column-key="createTime"
+      prop="createTime"
       sortable
     >
     </el-table-column>
@@ -72,6 +81,7 @@
     </el-table-column>
     <el-table-column
       fixed="right"
+      width="180"
     >
      <template slot="header" slot-scope="scope">
         <el-input
@@ -80,45 +90,44 @@
           placeholder="输入关键字搜索"/>
       </template>
       <template slot-scope="scope">
-        <el-button
-          size="mini"
-          >编辑
-        </el-button>
-        <el-button
-          size="mini"
-          >详情
-        </el-button>
-        <el-button
-          size="mini"
-          >离线
-        </el-button>
-        <el-button
-          size="mini"
-          type="danger"
-          >删除
-        </el-button>
+        <el-button-group>
+            <el-button icon="el-icon-edit" circle></el-button>
+            <el-button circle>
+                <font-awesome-icon
+                  icon="info-circle"
+                />
+            </el-button>
+            <el-button type="warning" circle>
+                <font-awesome-icon
+                  icon="power-off"
+                />
+            </el-button>
+            <el-button type="danger" icon="el-icon-delete" circle></el-button>
+        </el-button-group>
       </template>
     </el-table-column>
   </el-table>
 </template>
 
 <script>
+import filter from '@/mixins/table/filter'
 import { mapGetters } from 'vuex'
 
 export default {
+  mixins: [filter],
   data () {
     return {
       enableFilters: [
-        { text: '关闭', value: 0 },
-        { text: '启动', value: 1 }
+        { text: '关闭', value: '0' },
+        { text: '启动', value: '1' }
       ],
       onlineFilters: [
-        { text: '离线', value: 0 },
-        { text: '在线', value: 1 }
+        { text: '离线', value: '0' },
+        { text: '在线', value: '1' }
       ],
       playStateFilters: [
-        { text: '停止', value: 0 },
-        { text: '启动', value: 1 }
+        { text: '停止', value: '0' },
+        { text: '启动', value: '1' }
       ],
       search: ''
     }
@@ -143,10 +152,6 @@ export default {
     }
   },
   methods: {
-    filterHandler (value, row, column) {
-      console.log(row, value)
-      return true
-    },
     handleSelectionChange (val) {
       this.multipleSelection = val
     }

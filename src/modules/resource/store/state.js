@@ -4,7 +4,5 @@ export default {
     children: 'children',
     label: 'name'
   },
-  selected: {
-    node: null
-  }
+  resources: []
 }

@@ -43,6 +43,12 @@ import { mapGetters, mapMutations, mapActions } from 'vuex'
 import submit from '@/mixins/loading/submit'
 
 export default {
+  props: {
+    selectedResourceGroup: {
+      type: Object,
+      default: null
+    }
+  },
   mixins: [submit],
   components: {
     GroupDetailDialog
@@ -60,13 +66,12 @@ export default {
         return null
       },
       set (value) {
-        this.selectedResourceGroup(value)
+        this.$emit('update:selectedResourceGroup', value)
       }
     }
   },
   methods: {
     ...mapActions('resource', ['deleteResourceGroup']),
-    ...mapMutations('resource', ['selectedResourceGroup']),
     clickedNode (node) {
       this.currentNode = node
     },
@@ -100,7 +105,7 @@ export default {
 }
 </script>
 
-<style lang="sass">
+<style lang="sass" scoped>
 .custom-tree-node
   flex: 1
   display: flex

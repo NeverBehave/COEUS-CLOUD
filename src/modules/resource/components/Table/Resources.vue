@@ -1,7 +1,7 @@
 <template>
   <el-table
-    ref="taskTable"
-    :data="tasks"
+    ref="resourceTable"
+    :data="resources"
     tooltip-effect="dark"
     style="width: 100%"
     min-height="400px"
@@ -12,59 +12,60 @@
       width="55">
     </el-table-column>
     <el-table-column
-      label="任务名"
-      column-key="taskName"
-      prop="taskName"
-      sortable
-      fixed
-      >
+      label="素材"
+      column-key="thumbBlob"
+      prop="thumbBlob"
+    >
+      <template slot-scope="scope">
+        <Nail :base64="scope.row.thumbBlob"/>
+      </template>
     </el-table-column>
-    <el-table-column
-      label="设备编号"
-      column-key="order"
-      prop="order"
+     <el-table-column
+      label="素材名称"
+      column-key="name"
+      prop="name"
       sortable
       >
     </el-table-column>
      <el-table-column
-      label="状态"
-      column-key="enable"
-      prop="enable"
+      label="大小"
+      column-key="size"
+      prop="size"
       sortable
-      :filters="enableFilters"
-      :filter-method="filterHandler"
       >
       <template slot-scope="scope">
-        <span style="margin-left: 10px">{{ scope.row.enable === "1" ? '启用' : '禁用' }}</span>
+        <span>{{ scope.row.size }}</span>
       </template>
     </el-table-column>
     <el-table-column
-      label="下次执行时间"
-      column-key="nextExctime"
-      prop="nextExctime"
-      width="180"
+      label="状态"
+      column-key="state"
+      prop="state"
+      sortable
+      :filters="stateFilters"
+      :filter-method="filterHandler"
+    >
+     <template slot-scope="scope">
+        <span>{{ valueHandler(scope.row.state, stateFilters) }}</span>
+      </template>
+    </el-table-column>
+     <el-table-column
+      label="分组"
+      column-key="groupName"
+      prop="groupName"
       sortable
     >
     </el-table-column>
     <el-table-column
       label="创建时间"
       column-key="createTime"
-      width="180"
       prop="createTime"
       sortable
     >
     </el-table-column>
     <el-table-column
-      label="备注"
-      column-key="remark"
-      prop="remark"
-      sortable
-      show-overflow-tooltip
-    >
-    </el-table-column>
-    <el-table-column
       fixed="right"
-      width="280"
+      width="180"
     >
      <template slot="header" slot-scope="scope">
         <el-input
@@ -75,16 +76,6 @@
       <template slot-scope="scope">
         <el-button-group>
             <el-button icon="el-icon-edit" circle></el-button>
-            <el-button circle>
-                <font-awesome-icon
-                  icon="running"
-                />
-            </el-button>
-            <el-button circle>
-                <font-awesome-icon
-                  icon="stream"
-                />
-            </el-button>
             <el-button circle>
                 <font-awesome-icon
                   icon="info-circle"
@@ -103,40 +94,52 @@
 </template>
 
 <script>
+import Nail from '../Image/Blob'
 import filter from '@/mixins/table/filter'
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 
 export default {
   mixins: [filter],
+  components: {
+    Nail
+  },
   props: {
-    selected: {
+    selectedResourceGroup: {
+      type: Object,
+      default: null
+    },
+    selectedResources: {
       type: Array,
-      required: true
+      default: []
     }
+  },
+  watch: {
   },
   data () {
     return {
       enableFilters: [
-        { text: '禁用', value: '0' },
-        { text: '启用', value: '1' }
+        { text: '关闭', value: '0' },
+        { text: '启动', value: '1' }
+      ],
+      onlineFilters: [
+        { text: '离线', value: '0' },
+        { text: '在线', value: '1' }
+      ],
+      stateFilters: [
+        { text: '未审核通过', value: '0' },
+        { text: '审核中', value: '2' },
+        { text: '审核通过', value: '1' }
       ],
       search: ''
     }
   },
   computed: {
-    ...mapGetters('task', ['tasks']),
-    multipleSelection: {
-      get () {
-        return this.selected
-      },
-      set (value) {
-        this.$emit('update:selected', value)
-      }
-    }
+    ...mapGetters('resource', ['resources'])
   },
   methods: {
+    ...mapActions('resource', ['resourceList']),
     handleSelectionChange (val) {
-      this.multipleSelection = val
+      this.$emit('update:selectedResources', val)
     }
   }
 }

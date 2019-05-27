@@ -14,7 +14,7 @@ export async function newTask (data) {
       status: data.enable,
       cron: data.cron,
       orderNum: data.type,
-      value: [''],
+      value: [data.play_num],
       enable: 1 // ?
     }
   })
@@ -88,7 +88,7 @@ export async function taskLog (id) {
 }
 
 // Array of IDs
-export async function deleteTask (ids) {
+export async function deleteTasks (ids) {
   return axios({
     url: '/userTask',
     method: 'delete',

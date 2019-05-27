@@ -35,12 +35,15 @@ import { Container,
   Image,
   Link,
   Switch,
+  ButtonGroup,
+  Upload,
   MessageBox, // SERVICES
   Message,
   Loading,
   Table,
   Tree,
   TableColumn,
+  Scrollbar,
   Notification } from 'element-ui'
 
 Vue.use(Container)
@@ -104,6 +107,12 @@ Vue.use(Link)
 Vue.use(Switch)
 
 Vue.use(Tree)
+
+Vue.use(ButtonGroup)
+
+Vue.use(Scrollbar)
+
+Vue.use(Upload)
 
 Vue.prototype.$loading = Loading.service
 Vue.prototype.$msgbox = MessageBox

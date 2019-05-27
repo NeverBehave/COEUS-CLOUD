@@ -33,8 +33,15 @@ service.interceptors.response.use((response) => {
   }
 }, error => {
   /* eslint-disable no-console */
+  // Here we may encounter network issue or security policy related issue
+  // We need to throw an error since we have no data received
   console.log(error)
-  Promise.reject(error)
+  store.commit('auth/isLogin', false)
+  const res = new Error('Request Failed')
+  res.data = {}
+  res.data.msg = '网络开小差了，请稍后重试'
+
+  throw res
 })
 
 export default service

@@ -4,7 +4,7 @@
     :visible.sync="showDialog"
     >
         <el-row>
-            <el-col>分组名称</el-col>
+            <el-col>名称</el-col>
             <el-col>{{ node.name }}</el-col>
         </el-row>
         <el-row>

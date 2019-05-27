@@ -18,7 +18,7 @@
         </el-row>
         <el-divider/>
         <el-row>
-            <GroupList/>
+            <GroupList :selectedResourceGroup.sync="selectedResourceGroup"/>
         </el-row>
     </el-card>
 </template>
@@ -31,11 +31,16 @@ import submit from '@/mixins/loading/submit'
 
 export default {
   mixins: [submit],
+  data () {
+    return {
+      selectedResourceGroup: null
+    }
+  },
   components: {
     GroupList
   },
   computed: {
-    ...mapGetters('resource', ['selectedResourceGroup'])
+
   },
   methods: {
     ...mapActions('resource', ['createResourceGroup']),
