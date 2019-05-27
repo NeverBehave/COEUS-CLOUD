@@ -1,14 +1,20 @@
 # Coeus-Cloud
 
-## Note
+## Note 开发环境配置
 
-- Cookie 对于`localhost`无效，需要跑在一个二级域名上。本地调试可以在host加入`127.0.0.1 coeus.local`
-    - `vue-cli-service serve --host coeus.local`
-- 代理可以使用 https://github.com/garmeeh/local-cors-proxy/
-
-## Project setup
+## Project setup 安装
 ```
 yarn install
+```
+
+### 本地环境
+```
+yarn dev
+```
+
+### 远程环境
+```
+yarn remotedev
 ```
 
 ### Compiles and hot-reloads for development
