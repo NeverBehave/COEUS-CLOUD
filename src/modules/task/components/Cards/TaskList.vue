@@ -15,7 +15,10 @@
         </el-row>
         <el-divider/>
         <el-row>
-            <TaskTable :selected.sync="selected"/>
+            <TaskTable
+              :selected.sync="selected"
+              v-on:refresh="refresh"
+            />
         </el-row>
     </el-card>
 </template>
@@ -49,23 +52,30 @@ export default {
       })
     },
     deleteSelected () {
-      if (this.selected.length !== 0) {
-        this.startSubmit()
-        let ids = this.selected.map(e => {
-          return e.id
-        })
-
-        this.deleteTasks(ids).then(res => {
-          this.$message('删除成功')
-          this.refresh()
-        }).catch(err => {
-          this.$message.error('删除失败')
-        }).finally(() => {
-          this.endSubmit()
-        })
-      } else {
-        this.$message.error('无选中任务')
-      }
+      this.$confirm('此操作将永久删除选中任务, 是否继续?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        if (this.selected.length !== 0) {
+          this.startSubmit()
+          let ids = this.selected.map(e => {
+            return e.id
+          })
+          this.deleteTasks(ids).then(res => {
+            this.$message.success('删除成功')
+            this.refresh()
+          }).catch(err => {
+            this.$message.error('删除失败')
+          }).finally(() => {
+            this.endSubmit()
+          })
+        } else {
+          this.$message.error('无选中任务')
+        }
+      }).catch(() => {
+        // Cancelled
+      })
     }
   }
 }

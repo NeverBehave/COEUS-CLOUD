@@ -18,7 +18,10 @@
         </el-row>
         <el-divider/>
         <el-row>
-            <GroupList :selectedResourceGroup.sync="selectedResourceGroup"/>
+            <GroupList
+              :selectedResourceGroup.sync="selectedResourceGroup"
+              v-on:refresh="refresh"
+            />
         </el-row>
     </el-card>
 </template>
@@ -68,13 +71,17 @@ export default {
           name: value,
           parentId
         }).then(res => {
-          this.$message('创建成功！')
+          this.$message.success('创建成功！')
+          this.$emit('refresh')
         }).catch(err => {
           this.$message.error('创建失败，请重试')
         }).finally(() => {
           this.endSubmit()
         })
       })
+    },
+    refresh () {
+      this.$emit('refresh')
     }
   }
 }

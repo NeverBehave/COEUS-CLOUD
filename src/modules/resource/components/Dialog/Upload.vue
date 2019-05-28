@@ -2,6 +2,7 @@
     <el-dialog
         title="上传文件"
         :visible.sync="dialog"
+        :close="$emit('refresh')"
     >
         <el-upload
             :action="url"

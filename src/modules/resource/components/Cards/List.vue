@@ -1,4 +1,5 @@
 <template>
+<div>
     <el-card>
         <div slot="header">
             <span>资源管理</span>
@@ -10,7 +11,8 @@
           </el-col>
           <el-col>
             <SimpleList
-              :selectedResourceGroup.sync="selectedResourceGroup"/>
+              :selectedResourceGroup.sync="selectedResourceGroup"
+            />
           </el-col>
         </el-row>
         <el-divider/>
@@ -28,16 +30,12 @@
                 <el-button
                     type="primary"
                     :disabled="!this.selectedResourceGroup"
-                    @click="showUploadDialog = true"
+                    @click="dialog.upload = true"
                     :loading="submitting"
                 >
                     添加
                 </el-button>
               </div>
-              <UploadDialog
-                :showDialog.sync="showUploadDialog"
-                :groupId="groupId"
-              />
               <el-button
                 @click="deleteRes"
                 :loading="submitting"
@@ -47,6 +45,7 @@
               </el-button>
               <el-button
                 :loading="submitting"
+                @click="downloadResource"
               >下载
               </el-button>
               <el-button
@@ -67,6 +66,16 @@
           </el-col>
         </el-row>
     </el-card>
+    <DownloadToDevice
+      :showDialog.sync="dialog.download"
+      :nodes="selectedResources"
+    />
+    <UploadDialog
+      :showDialog.sync="dialog.upload"
+      :groupId="groupId"
+      v-on:refresh="refresh"
+     />
+</div>
 </template>
 
 <script>
@@ -74,6 +83,7 @@ import SimpleList from '../Group/SimpleList'
 import ResourceTable from '../Table/Resources'
 
 import UploadDialog from '../Dialog/Upload'
+import DownloadToDevice from '../Dialog/DownloadToDevice'
 
 import submit from '@/mixins/loading/submit'
 import { mapActions, mapMutations, mapGetters } from 'vuex'
@@ -82,14 +92,18 @@ export default {
   components: {
     SimpleList,
     ResourceTable,
-    UploadDialog
+    UploadDialog,
+    DownloadToDevice
   },
   mixins: [submit],
   data () {
     return {
       selectedResourceGroup: null,
       selectedResources: [],
-      showUploadDialog: false
+      dialog: {
+        upload: false,
+        download: false
+      }
     }
   },
   watch: {
@@ -131,18 +145,33 @@ export default {
       })
     },
     deleteRes () {
-      this.startSubmit()
-      this.deleteResources(this.selectedResources.map(e => {
-        return e.id
-      })).then(res => {
-        this.$message('删除成功！')
-        this.refresh()
-      }).catch(err => {
-        console.log(err)
-        this.$message.error('删除失败')
-      }).finally(() => {
-        this.endSubmit()
+      this.$confirm('此操作将永久删除资源, 是否继续?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        this.startSubmit()
+        this.deleteResources(this.selectedResources.map(e => {
+          return e.id
+        })).then(res => {
+          this.$message.success('删除成功！')
+          this.refresh()
+        }).catch(err => {
+          console.log(err)
+          this.$message.error('删除失败')
+        }).finally(() => {
+          this.endSubmit()
+        })
+      }).catch(() => {
+        // Cancelled
       })
+    },
+    downloadResource () {
+      if (this.selectedResources.length <= 0) {
+        this.$message.warning('请先选择资源，再下载')
+      } else {
+        this.dialog.download = true
+      }
     }
   }
 }

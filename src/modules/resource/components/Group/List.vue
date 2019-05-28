@@ -60,20 +60,12 @@ export default {
     }
   },
   computed: {
-    ...mapGetters('resource', ['tree', 'structure']),
-    currentNode: {
-      get () {
-        return null
-      },
-      set (value) {
-        this.$emit('update:selectedResourceGroup', value)
-      }
-    }
+    ...mapGetters('resource', ['tree', 'structure'])
   },
   methods: {
     ...mapActions('resource', ['deleteResourceGroup']),
     clickedNode (node) {
-      this.currentNode = node
+      this.$emit('update:selectedResourceGroup', node)
     },
     nodeDetail (node) {
       this.detailNode = node
@@ -87,15 +79,10 @@ export default {
       }).then(() => {
         this.startSubmit()
         this.deleteResourceGroup(node.id).then(res => {
-          this.$message({
-            type: 'success',
-            message: '删除成功!'
-          })
+          this.$message.success('删除成功!')
+          this.$emit('refresh')
         }).catch(err => {
-          this.$message({
-            type: 'success',
-            message: '删除失败，请重试'
-          })
+          this.$message.error('删除失败，请重试')
         }).finally(() => {
           this.endSubmit()
         })

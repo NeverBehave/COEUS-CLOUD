@@ -9,15 +9,10 @@
             abel-width="0px"
             status-icon
         >
-            <el-form-item prop="deviceID" label="设备编号">
-                <el-select v-model="form.deviceID" clearable placeholder="请选择">
-                    <el-option
-                    v-for="item in onlineDevices"
-                    :key="item.value"
-                    :label="item.label"
-                    :value="item.value">
-                    </el-option>
-                </el-select>
+            <el-form-item prop="deviceId" label="设备编号">
+              <OnlineDevices
+                :selectedDevice.sync="device"
+              />
             </el-form-item>
             <el-form-item label="任务名" prop="taskName">
                 <el-input
@@ -113,18 +108,24 @@
 </template>
 
 <script>
+import OnlineDevices from '@/modules/device/components/Options/OnlineDevices'
+
 import { mapActions, mapGetters } from 'vuex'
 
 import submit from '@/mixins/loading/submit'
 
 export default {
   mixins: [submit],
+  components: {
+    OnlineDevices
+  },
   data () {
     return {
       cronPopover: false,
+      device: null,
       form: {
         play_num: 0,
-        deviceID: '',
+        deviceId: '',
         taskName: '',
         type: '',
         description: '',
@@ -136,9 +137,8 @@ export default {
           { required: true, message: '请输入任务名称' },
           { min: 1, max: 20, message: '长度在 1 到 20 个字符', trigger: 'blur' }
         ],
-        deviceID: [
-          // Ignored for now
-          // { required: true, message: '请选择设备' }
+        deviceId: [
+          { required: true, message: '请选择设备' }
         ],
         type: [
           { required: true, message: '请选择类型' }
@@ -149,20 +149,18 @@ export default {
       }
     }
   },
-  computed: {
-    ...mapGetters('device', ['onlineDevices']),
-    ...mapGetters('task', ['getTypes'])
+  watch: {
+    device (value) {
+      if (value) {
+        this.form.deviceId = value.id
+      }
+    }
   },
-  mounted () {
-    this.updateOnlineDevices().then(res => {
-      this.$message('在线设备获取成功')
-    }).catch(err => {
-      this.$message.error('在线设备信息获取失败')
-    })
+  computed: {
+    ...mapGetters('task', ['getTypes'])
   },
   methods: {
     ...mapActions('task', ['newTask']),
-    ...mapActions('device', ['updateOnlineDevices']),
     submitTask () {
       this.$refs.taskForm.validate(vaild => {
         this.startSubmit()
@@ -188,7 +186,8 @@ export default {
       })
     },
     changeCron (val) {
-      this.form.cron = val
+      // Since backend only accept two parameters, ignore the year field.
+      this.form.cron = val.substring(0, val.length - 2)
     },
     runNow () {
 

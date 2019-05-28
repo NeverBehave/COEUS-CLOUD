@@ -1,5 +1,5 @@
 <template>
-    <GroupListCard/>
+    <GroupListCard v-on:refresh="refresh"/>
 </template>
 
 <script>
@@ -11,14 +11,17 @@ export default {
     GroupListCard
   },
   mounted () {
-    this.updateTree().then(res => {
-      this.$message('目录信息获取成功')
-    }).catch(err => {
-      this.$message.error('目录获取失败')
-    })
+    this.refresh()
   },
   methods: {
-    ...mapActions('resource', ['updateTree'])
+    ...mapActions('resource', ['updateTree']),
+    refresh () {
+      this.updateTree().then(res => {
+        this.$message('目录信息获取成功')
+      }).catch(err => {
+        this.$message.error('目录获取失败')
+      })
+    }
   }
 }
 </script>

@@ -37,6 +37,7 @@ import { Container,
   Switch,
   ButtonGroup,
   Upload,
+  Tooltip,
   MessageBox, // SERVICES
   Message,
   Loading,
@@ -113,6 +114,8 @@ Vue.use(ButtonGroup)
 Vue.use(Scrollbar)
 
 Vue.use(Upload)
+
+Vue.use(Tooltip)
 
 Vue.prototype.$loading = Loading.service
 Vue.prototype.$msgbox = MessageBox

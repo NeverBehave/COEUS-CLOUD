@@ -1,3 +1,5 @@
+import './element'
+
 import './fa'
 
 import './vuex'

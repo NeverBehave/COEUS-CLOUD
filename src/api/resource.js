@@ -132,6 +132,7 @@ export async function resourceGroup (data) {
 export function uploadResource () {
   return '/api/cloud/resource/uploadFile'
 
+  // Upload was handle by Element Component
   // return axios({
   //   url: '/cloud/resource/uploadFile',
   //   method: 'post',
@@ -145,12 +146,10 @@ export function uploadResource () {
 /*
 [{"resourceId":"1132904937718771714","deviceNo":"Coeus65000002"},{"resourceId":"1132865570547658754","deviceNo":"Coeus65000002"},{"resourceId":"1131454436963774465","deviceNo":"Coeus65000002"}]
 */
-export async function downloadResource () {
+export async function downloadResource (data) {
   return axios({
     url: '/cloud/device/downloadTo',
     method: 'put',
-    data: [
-
-    ]
+    data
   })
 }

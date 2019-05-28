@@ -8,7 +8,7 @@ export async function newTask (data) {
     url: '/userTask',
     method: 'post',
     data: {
-      deviceNo: data.deviceID,
+      deviceNo: data.deviceId,
       taskName: data.taskName,
       remark: data.description,
       status: data.enable,
@@ -42,7 +42,7 @@ export async function taskDetail (id) {
 }
 
 // Array of IDs
-export async function enableTask (ids) {
+export async function enableTasks (ids) {
   return axios({
     url: '/userTask/open',
     method: 'post',
@@ -53,7 +53,7 @@ export async function enableTask (ids) {
 }
 
 // Array of IDs
-export async function runTask (ids) {
+export async function runTasks (ids) {
   return axios({
     url: '/userTask/run',
     method: 'post',
@@ -64,7 +64,7 @@ export async function runTask (ids) {
 }
 
 // Array of IDs
-export async function disableTask (ids) {
+export async function disableTasks (ids) {
   return axios({
     url: '/userTask/close',
     method: 'post',

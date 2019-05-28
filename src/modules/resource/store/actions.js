@@ -2,7 +2,9 @@ import { resourceGroup,
   deleteResourceGroup as deleteResourceGroupAPI,
   createResourceGroup as createResourceGroupAPI,
   resourceList as resourceListAPI,
-  deleteResources as deleteResourcesAPI } from '@/api/resource'
+  deleteResources as deleteResourcesAPI,
+  updateResource,
+  downloadResource } from '@/api/resource'
 
 export default {
   updateTree ({ commit }) {
@@ -31,6 +33,17 @@ export default {
   },
   deleteResources ({}, ids) {
     return deleteResourcesAPI(ids)
+  },
+  editResourceName ({}, { id, name }) {
+    return updateResource(id, { name })
+  },
+  downloadResourcesToDevice ({}, { deviceId, resourceIds }) {
+    return downloadResource(resourceIds.map(e => {
+      return {
+        deviceNo: deviceId,
+        resourceId: e
+      }
+    }))
   }
 }
 
