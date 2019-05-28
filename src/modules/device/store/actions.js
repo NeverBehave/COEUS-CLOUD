@@ -1,12 +1,12 @@
 import { deviceList as deviceListAPI,
-         allDeviceList,
-         onlineDeviceList,
-         deleteDevices as deleteDevicesAPI,
-         updateDevice,
-         disconnectDevices as disconnectDevicesAPI,
-         pauseDevice,
-         playDevice,
-         runDevice } from '@/api/device'
+  allDeviceList,
+  onlineDeviceList,
+  deleteDevices as deleteDevicesAPI,
+  updateDevice,
+  disconnectDevices as disconnectDevicesAPI,
+  pauseDevice,
+  playDevice,
+  runDevice } from '@/api/device'
 
 export default {
   addDevice ({}, data) {
@@ -31,19 +31,19 @@ export default {
   disconnectDevices ({}, deviceIds) {
     return disconnectDevicesAPI(deviceIds)
   },
-  devicePlay ({}, id){
+  devicePlay ({}, id) {
     return playDevice(id)
   },
-  devicePause({}, id){
+  devicePause ({}, id) {
     return pauseDevice(id)
   },
-  deviceStop({}, id) {
+  deviceStop ({}, id) {
     return runDevice({
       state: '0',
       id
     })
   },
-  deviceStart ({}, id){
+  deviceStart ({}, id) {
     return runDevice({
       state: '1',
       id

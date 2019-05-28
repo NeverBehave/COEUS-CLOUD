@@ -2,5 +2,6 @@ export default {
   onlineDevices: state => state.onlineDevices,
   devices: state => state.devices,
   versions: state => state.versions,
-  refresh: state => state.refresh
+  refresh: state => state.refresh,
+  modes: state => state.modes
 }

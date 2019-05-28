@@ -6,13 +6,13 @@
             <el-button style="float: right; padding: 3px 0" type="text">需要帮助？</el-button>
         </div>
         <el-row>
-            <el-button 
+            <el-button
               type="primary"
               @click="addDevice"
             >
               添加
             </el-button>
-            <el-button 
+            <el-button
               type="danger"
               @click="delDevices"
             >
@@ -20,7 +20,7 @@
             </el-button>
             <el-button>导入</el-button>
             <el-button>导出</el-button>
-            <el-button 
+            <el-button
               type="warning"
               @click="disconDevices"
             >
@@ -62,27 +62,27 @@ export default {
   },
   methods: {
     ...mapActions('device', ['deleteDevices', 'disconnectDevices', 'refresh']),
-    addDevice() {
+    addDevice () {
       this.addDevice = true
     },
-    doRefresh() {
+    doRefresh () {
       this.refresh().then(() => {
         this.$message('刷新成功！')
       }).catch(() => {
         this.$message.error('刷新失败！')
       })
     },
-    selected() {
-       if (this.selectedDevices.length > 0) {
-         return true
-       } else {
+    selected () {
+      if (this.selectedDevices.length > 0) {
+        return true
+      } else {
         this.$message.warning('请选中设备后再操作')
         return false
       }
     },
-    delDevices() {
+    delDevices () {
       if (this.selected()) {
-         this.$confirm('此操作将把所有选中设备从云端删除, 是否继续?', '提示', {
+        this.$confirm('此操作将把所有选中设备从云端删除, 是否继续?', '提示', {
           confirmButtonText: '确定',
           cancelButtonText: '取消',
           type: 'warning'
@@ -100,9 +100,9 @@ export default {
         ])
       }
     },
-    disconDevices() {
-        if (this.selected()) {
-         this.$confirm('此操作将把所有选中设备从云端断开, 是否继续?', '提示', {
+    disconDevices () {
+      if (this.selected()) {
+        this.$confirm('此操作将把所有选中设备从云端断开, 是否继续?', '提示', {
           confirmButtonText: '确定',
           cancelButtonText: '取消',
           type: 'warning'

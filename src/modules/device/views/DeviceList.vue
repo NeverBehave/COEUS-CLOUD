@@ -21,18 +21,18 @@ export default {
     ...mapGetters('device', ['refresh'])
   },
   watch: {
-    refresh(value) {
+    refresh (value) {
       this.refetch()
     }
   },
   methods: {
     ...mapActions('device', ['deviceList']),
-    refetch() {
+    refetch () {
       return this.deviceList()
     }
   },
   mounted () {
-   this.refetch().then(res => {
+    this.refetch().then(res => {
       this.$message('设备信息获取成功！')
     }).catch(err => {
       this.$message.error('设备信息获取失败')

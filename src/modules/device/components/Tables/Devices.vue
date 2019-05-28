@@ -91,24 +91,24 @@
       </template>
       <template slot-scope="scope">
         <el-button-group>
-            <el-tooltip 
-              effect="dark" 
-              content="编辑" 
+            <el-tooltip
+              effect="dark"
+              content="编辑"
               placement="top"
             >
-              <el-button 
-                icon="el-icon-edit" 
+              <el-button
+                icon="el-icon-edit"
                 @click="editDevice(scope.row)"
                 circle
               />
             </el-tooltip>
-             <el-tooltip 
-              effect="dark" 
-              content="断开" 
+             <el-tooltip
+              effect="dark"
+              content="断开"
               placement="top"
             >
-              <el-button 
-                type="warning" 
+              <el-button
+                type="warning"
                 circle
                 @click="disconDevice(scope.row)"
               >
@@ -123,14 +123,14 @@
              <RunStateButton
               :device="scope.row"
             />
-              <el-tooltip 
-              effect="dark" 
-              content="删除" 
+              <el-tooltip
+              effect="dark"
+              content="删除"
               placement="top"
               >
-                <el-button 
-                  type="danger" 
-                  icon="el-icon-delete" 
+                <el-button
+                  type="danger"
+                  icon="el-icon-delete"
                   circle
                   @click="delDevice(scope.row)"
                 />
@@ -152,7 +152,7 @@ export default {
   mixins: [filter],
   props: {
     selectedDevices: {
-      type: Array, 
+      type: Array,
       default: []
     }
   },
@@ -197,44 +197,44 @@ export default {
     handleSelectionChange (val) {
       this.$emit('update:selectedDevices', val)
     },
-    editDevice(device) {
+    editDevice (device) {
       this.selectedDevice = device
       this.dialog.editDevice = true
     },
     disconDevice (device) {
       this.$confirm('此操作将把设备从云端断开, 是否继续?', '提示', {
-          confirmButtonText: '确定',
-          cancelButtonText: '取消',
-          type: 'warning'
-        }).then(() => {
-            this.disconnectDevices([device.id])
-            .then(() => {
-              this.$message.success('断开成功！')
-              this.refresh()
-            }).catch(() => {
-              this.$message.error('断开失败！')
-            })
-        }).catch(() => {
-          // Cancelled
-        })
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        this.disconnectDevices([device.id])
+          .then(() => {
+            this.$message.success('断开成功！')
+            this.refresh()
+          }).catch(() => {
+            this.$message.error('断开失败！')
+          })
+      }).catch(() => {
+        // Cancelled
+      })
     },
     delDevice (device) {
       this.$confirm('此操作将把设备从云端删除, 是否继续?', '提示', {
-          confirmButtonText: '确定',
-          cancelButtonText: '取消',
-          type: 'warning'
-        }).then(() => {
-          this.deleteDevices([device.id])
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        this.deleteDevices([device.id])
           .then(() => {
             this.$message.success('删除成功！')
             this.refresh()
           }).catch(() => {
             this.$message.error('删除失败！')
           })
-        }).catch(() => {
-          // Cancelled
-        })
-    },
+      }).catch(() => {
+        // Cancelled
+      })
+    }
 
   }
 }
