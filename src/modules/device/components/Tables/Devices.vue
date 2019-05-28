@@ -4,7 +4,7 @@
     :data="devices"
     tooltip-effect="dark"
     style="width: 100%"
-    min-height="400px"
+    min-height="600px"
     @selection-change="handleSelectionChange"
   >
     <el-table-column
@@ -13,8 +13,8 @@
     </el-table-column>
     <el-table-column
       label="设备编号"
-      column-key="deviceID"
-      prop="deviceID"
+      column-key="deviceNo"
+      prop="deviceNo"
       sortable
       fixed
       >
@@ -81,7 +81,7 @@
     </el-table-column>
     <el-table-column
       fixed="right"
-      width="180"
+      width="220"
     >
      <template slot="header" slot-scope="scope">
         <el-input
@@ -91,18 +91,50 @@
       </template>
       <template slot-scope="scope">
         <el-button-group>
-            <el-button icon="el-icon-edit" circle></el-button>
-            <el-button circle>
-                <font-awesome-icon
-                  icon="info-circle"
+            <el-tooltip 
+              effect="dark" 
+              content="编辑" 
+              placement="top"
+            >
+              <el-button 
+                icon="el-icon-edit" 
+                @click="editDevice(scope.row)"
+                circle
+              />
+            </el-tooltip>
+             <el-tooltip 
+              effect="dark" 
+              content="断开" 
+              placement="top"
+            >
+              <el-button 
+                type="warning" 
+                circle
+                @click="disconDevice(scope.row)"
+              >
+                  <font-awesome-icon
+                    icon="slash"
+                  />
+              </el-button>
+             </el-tooltip>
+             <PlayStateButton
+              :device="scope.row"
+             />
+             <RunStateButton
+              :device="scope.row"
+            />
+              <el-tooltip 
+              effect="dark" 
+              content="删除" 
+              placement="top"
+              >
+                <el-button 
+                  type="danger" 
+                  icon="el-icon-delete" 
+                  circle
+                  @click="delDevice(scope.row)"
                 />
-            </el-button>
-            <el-button type="warning" circle>
-                <font-awesome-icon
-                  icon="power-off"
-                />
-            </el-button>
-            <el-button type="danger" icon="el-icon-delete" circle></el-button>
+              </el-tooltip>
         </el-button-group>
       </template>
     </el-table-column>
@@ -111,10 +143,23 @@
 
 <script>
 import filter from '@/mixins/table/filter'
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
+
+import PlayStateButton from '../Buttons/PlayState'
+import RunStateButton from '../Buttons/RunState'
 
 export default {
   mixins: [filter],
+  props: {
+    selectedDevices: {
+      type: Array, 
+      default: []
+    }
+  },
+  components: {
+    PlayStateButton,
+    RunStateButton
+  },
   data () {
     return {
       enableFilters: [
@@ -129,7 +174,11 @@ export default {
         { text: '停止', value: '0' },
         { text: '启动', value: '1' }
       ],
-      search: ''
+      search: '',
+      selectedDevice: null,
+      dialog: {
+        editDevice: false
+      }
     }
   },
   computed: {
@@ -141,20 +190,52 @@ export default {
           value: e.value
         }
       })
-    },
-    multipleSelection: {
-      get () {
-        return []
-      },
-      set (value) {
-        console.log(value)
-      }
     }
   },
   methods: {
+    ...mapActions('device', ['deleteDevices', 'disconnectDevices', 'refresh']),
     handleSelectionChange (val) {
-      this.multipleSelection = val
-    }
+      this.$emit('update:selectedDevices', val)
+    },
+    editDevice(device) {
+      this.selectedDevice = device
+      this.dialog.editDevice = true
+    },
+    disconDevice (device) {
+      this.$confirm('此操作将把设备从云端断开, 是否继续?', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+            this.disconnectDevices([device.id])
+            .then(() => {
+              this.$message.success('断开成功！')
+              this.refresh()
+            }).catch(() => {
+              this.$message.error('断开失败！')
+            })
+        }).catch(() => {
+          // Cancelled
+        })
+    },
+    delDevice (device) {
+      this.$confirm('此操作将把设备从云端删除, 是否继续?', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+          this.deleteDevices([device.id])
+          .then(() => {
+            this.$message.success('删除成功！')
+            this.refresh()
+          }).catch(() => {
+            this.$message.error('删除失败！')
+          })
+        }).catch(() => {
+          // Cancelled
+        })
+    },
+
   }
 }
 </script>

@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 
 import DevicesCard from '../components/Cards/Devices'
 import fullscreen from '@/mixins/loading/fullscreen'
@@ -17,11 +17,22 @@ export default {
     DevicesCard
   },
   mixins: [fullscreen],
+  computed: {
+    ...mapGetters('device', ['refresh'])
+  },
+  watch: {
+    refresh(value) {
+      this.refetch()
+    }
+  },
   methods: {
-    ...mapActions('device', ['deviceList'])
+    ...mapActions('device', ['deviceList']),
+    refetch() {
+      return this.deviceList()
+    }
   },
   mounted () {
-    this.deviceList().then(res => {
+   this.refetch().then(res => {
       this.$message('设备信息获取成功！')
     }).catch(err => {
       this.$message.error('设备信息获取失败')

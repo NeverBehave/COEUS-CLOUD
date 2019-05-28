@@ -4,5 +4,8 @@ export default {
   },
   onlineDevices (state, data) {
     state.onlineDevices = data
+  },
+  refresh (state) {
+    state.refresh = !state.refresh
   }
 }

@@ -1,7 +1,7 @@
 <template>
     <el-dialog
     title="选择目标分组"
-    :visible.sync="showDialog"
+    :visible.sync="dialog"
     >
         <el-row>
             <SimpleList
@@ -17,7 +17,7 @@
                 确 定
             </el-button>
             <el-button
-                @click="closeDialog"
+                @click="dialog = false"
             >
                 取 消
             </el-button>
@@ -26,17 +26,15 @@
 </template>
 
 <script>
+import child from '@/mixins/dialog/child'
 import SimpleList from '../Group/SimpleList'
 
 export default {
+  mixins: [child],
   components: {
     SimpleList
   },
   props: {
-    showDialog: {
-      type: Boolean,
-      required: true
-    },
     node: {
       type: Object
     }
@@ -52,11 +50,9 @@ export default {
     }
   },
   methods: {
-    closeDialog () {
-      this.$emit('update:showDialog', false)
-    },
     confirmed () {
-
+      this.$message('尚未实现')
+      this.dialog = false
     }
   }
 }

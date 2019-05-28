@@ -10,5 +10,6 @@ export default {
       label: 'X50'
     }
   ],
-  onlineDevices: []
+  onlineDevices: [],
+  refresh: false,
 }

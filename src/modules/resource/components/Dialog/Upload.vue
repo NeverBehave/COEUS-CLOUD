@@ -20,8 +20,10 @@
 
 <script>
 import { uploadResource } from '@/api/resource'
+import child from '@/mixins/dialog/child'
 
 export default {
+  mixins: [child],
   data () {
     return {
       fileList: []
@@ -31,21 +33,9 @@ export default {
     groupId: {
       type: String,
       default: '0'
-    },
-    showDialog: {
-      type: Boolean,
-      required: true
     }
   },
   computed: {
-    dialog: {
-      get () {
-        return this.showDialog
-      },
-      set (value) {
-        this.$emit('update:showDialog', false)
-      }
-    },
     url () {
       return uploadResource()
     }

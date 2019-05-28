@@ -1,5 +1,7 @@
 import axios from '@/config/axios'
+import _ from 'lodash'
 
+// With Conditon
 export async function deviceList (data) {
   return axios({
     url: '/cloud/device/read/list',
@@ -15,51 +17,101 @@ export async function deviceList (data) {
   })
 }
 
-export async function addDevice (data) {
+export async function allDeviceList () {
   return axios({
-    url: '/cloud/device/update',
-    method: 'post',
-    data: {
-      desc: data.password,
-      deviceNo: data.deviceID,
-      remark: data.description,
-      version: data.version
-    }
+    url: '/cloud/device/read/qlist2',
+    method: 'put',
+    data: {}
   })
 }
 
-export async function updateDevice (data) {
+export async function updateDevice ({
+  id = null, password, deviceId, description, version
+}) {
+  // Remove null field
+  let data = _.omitBy({
+    id,
+    desc: password,
+    deviceNo: deviceId,
+    remark: description,
+    version
+  }, _.isNull)
   return axios({
     url: '/cloud/device/update',
     method: 'post',
-    data: {
-      id: '',
-      desc: 'aaa',
-      deviceNo: 'aa',
-      remark: '',
-      version: 'X65'
-    }
+    data
   })
 }
 
 // [{"id":"1131099426635640833"},{"id":"1131099404028342273"}]
 // ?????
-export async function deleteDevice (ids) {
+export async function deleteDevices (ids) {
   return axios({
     url: '/cloud/device/deleteBatch',
     method: 'delete',
-    data: ids
+    data: ids.map(e => {
+      return {
+        id: e
+      }
+    })
+  })
+}
+
+export async function disconnectDevices (ids) {
+  return axios({
+    url: '/cloud/device/unlink',
+    method: 'put',
+    data: ids.map(e => {
+      return {
+        id: e
+      }
+    })
   })
 }
 
 // rows:[]
-export async function onlineDeviceList () {
+export async function onlineDeviceList (ids) {
   return axios({
     url: '/cloud/device/read/onlineList',
     method: 'put',
     data: {}
   })
 }
+
+export async function playDevice (id) {
+  return axios({
+    url: '/cloud/device/doPlay',
+    method: 'put',
+    data: {
+      id,
+      state: '1'
+    }
+  })
+}
+
+export async function pauseDevice (id) {
+  return axios({
+    url: '/cloud/device/doPause',
+    method: 'put',
+    data: {
+      id,
+      state: '1'
+    }
+  })
+}
+
+export async function runDevice (id, state) {
+  return axios({
+    url: '/cloud/device/run',
+    method: 'put',
+    data: {
+      id,
+      state
+    }
+  })
+}
+
+// Control Center Section Begin
 
 // id: "1132930361366638594"
 // position: "9"

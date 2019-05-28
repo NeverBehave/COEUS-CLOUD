@@ -1,7 +1,7 @@
 <template>
     <el-dialog
     title="分组详情"
-    :visible.sync="showDialog"
+    :visible.sync="dialog"
     >
         <el-row>
             <el-col>名称</el-col>
@@ -16,26 +16,22 @@
             <el-col>{{ node.updateTime }}</el-col>
         </el-row>
         <span slot="footer" class="dialog-footer">
-            <el-button type="primary" @click="closeDialog">确 定</el-button>
+            <el-button type="primary" @click="dialog = false">确 定</el-button>
         </span>
     </el-dialog>
 </template>
 
 <script>
+import child from '@/mixins/dialog/child'
+
 export default {
+  mixins: [child],
   props: {
-    showDialog: {
-      type: Boolean,
-      required: true
-    },
     node: {
       type: Object
     }
   },
   methods: {
-    closeDialog () {
-      this.$emit('update:showDialog', false)
-    }
   }
 }
 </script>
