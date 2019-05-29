@@ -4,8 +4,7 @@
           :gutter="10"
         >
             <el-col>
-                <OnlineDeviceCard
-                    :selectedDevice.sync="selectedDevice"/>
+                <OnlineDeviceCard/>
             </el-col>
         </el-row>
         <el-divider/>
@@ -22,8 +21,7 @@
               :xs="24"
               :lg="12"
             >
-                <DeviceSettingCard
-                    :device="selectedDevice"/>
+                <DeviceSettingCard/>
             </el-col>
         </el-row>
     </div>
@@ -40,10 +38,8 @@ export default {
     DevicePlayListCard,
     OnlineDeviceCard
   },
-  data () {
-    return {
-      selectedDevice: null
-    }
+  methods: {
+
   }
 }
 </script>

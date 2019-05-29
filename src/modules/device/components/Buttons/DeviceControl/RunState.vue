@@ -1,15 +1,14 @@
 <template>
     <el-tooltip
-    v-if="device.runState === '0'"
-    effect="dark"
-    content="启动"
-    placement="top"
->
+        v-if="device.runState === '0'"
+        effect="dark"
+        content="启动"
+        placement="top"
+    >
         <el-button
           type="primary"
           circle
           @click="start"
-          :disabled="offline"
         >
             <font-awesome-icon
             icon="power-off"
@@ -26,7 +25,6 @@
           type="warning"
           circle
           @click="stop"
-          :disabled="offline"
         >
             <font-awesome-icon
               icon="power-off"
@@ -36,27 +34,22 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions, mapMutations, mapGetters } from 'vuex'
 
 export default {
-  props: {
-    device: {
-      type: Object,
-      required: true
-    }
-  },
   computed: {
-    offline () {
-      return this.device.isOnline === '0'
-    }
+    ...mapGetters('device', {
+      device: 'deviceControlSelected'
+    })
   },
   methods: {
     ...mapActions('device', ['deviceStart', 'deviceStop', 'refresh']),
+    ...mapMutations('device', ['deviceControlrunState']),
     start () {
       this.deviceStart(this.device.id)
         .then(() => {
           this.$message.success('启动成功！')
-          this.refresh()
+          this.deviceControlrunState('1')
         })
         .catch(() => {
           this.$message.error('启动失败！')
@@ -66,9 +59,10 @@ export default {
       this.deviceStop(this.device.id)
         .then(() => {
           this.$message.success('关闭成功！')
-          this.refresh()
+          this.deviceControlrunState('0')
         })
-        .catch(() => {
+        .catch((err) => {
+          console.log(err)
           this.$message.error('关闭失败！')
         })
     }

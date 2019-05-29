@@ -163,8 +163,8 @@ export default {
     ...mapActions('task', ['newTask']),
     submitTask () {
       this.$refs.taskForm.validate(vaild => {
-        this.startSubmit()
         if (vaild) {
+          this.startSubmit()
           return this.newTask(this.form).then(data => {
             this.$notify({
               title: '提交成功',

@@ -8,12 +8,11 @@
     <el-col>
       <ChooseOnlineDevices
         :selectedDevice.sync="selected"/>
-    </el-col>
-    <el-col>
-      <RunStateButton
-        v-if="selectedDevice"
-        :device="selectedDevice"
-      />
+      <template
+        v-if="deviceSelected">
+        <el-divider direction="vertical"/>
+        <RunStateButton/>
+      </template>
     </el-col>
   </el-row>
 </el-card>
@@ -21,28 +20,30 @@
 
 <script>
 import ChooseOnlineDevices from '../Options/OnlineDevices'
-import RunStateButton from '../Buttons/RunState'
+import RunStateButton from '../Buttons/DeviceControl/RunState'
+
+import { mapMutations, mapGetters } from 'vuex'
 
 export default {
   components: {
     ChooseOnlineDevices,
     RunStateButton
   },
-  props: {
-    selectedDevice: {
-      type: Object,
-      default: null
-    }
-  },
   computed: {
+    ...mapGetters('device', {
+      deviceSelected: 'deviceControlSelected'
+    }),
     selected: {
       get () {
-        return this.selectedDevice
+        return this.deviceSelected
       },
       set (value) {
-        this.$emit('update:selectedDevice', value)
+        this.deviceControlSelected(value)
       }
     }
+  },
+  methods: {
+    ...mapMutations('device', ['deviceControlSelected'])
   }
 }
 </script>

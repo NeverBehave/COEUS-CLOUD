@@ -16,14 +16,20 @@ export default {
       label: '单片循环'
     },
     {
-      value: '1',
+      value: '2',
       label: '随机播放'
     },
     {
-      value: '2',
+      value: '1',
       label: '顺序播放'
     }
   ],
   onlineDevices: [],
+  deviceSetting: {},
+  devicePlayList: {},
+  deviceControl: {
+    selected: null,
+    refresh: false
+  },
   refresh: false
 }

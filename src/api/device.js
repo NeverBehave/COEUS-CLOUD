@@ -25,6 +25,17 @@ export async function allDeviceList () {
   })
 }
 
+//
+export async function deviceDetail (id) {
+  return axios({
+    url: '/cloud/device/read/detail',
+    method: 'put',
+    data: {
+      id
+    }
+  })
+}
+
 export async function updateDevice ({
   id = null, password, deviceId, description, version
 }) {
@@ -89,6 +100,17 @@ export async function playDevice (id) {
   })
 }
 
+export async function playPosition (id, position) {
+  return axios({
+    url: '/cloud/device/doPlay',
+    method: 'put',
+    data: {
+      id,
+      position
+    }
+  })
+}
+
 export async function pauseDevice (id) {
   return axios({
     url: '/cloud/device/doPause',
@@ -100,7 +122,18 @@ export async function pauseDevice (id) {
   })
 }
 
-export async function runDevice (id, state) {
+export async function pausePosition (id, position) {
+  return axios({
+    url: '/cloud/device/doPause',
+    method: 'put',
+    data: {
+      id,
+      position
+    }
+  })
+}
+
+export async function runDevice ({ id, state }) {
   return axios({
     url: '/cloud/device/run',
     method: 'put',
@@ -128,7 +161,7 @@ export async function playMedia ({
   })
 }
 
-export async function renameMedia ({
+export async function renamePlayListItem ({
   id, name, position
 }) {
   return axios({
@@ -174,6 +207,7 @@ updateTime: "2019-05-27 16:52:39"
 msg: "请求成功"
 timestamp: "1558947260582"
 */
+// 不能知道当前影片是否在播放，只知道当前位置
 export async function devicePlayList (id) {
   return axios({
     url: '/cloud/devicePlaylist/read/detail',
@@ -184,7 +218,8 @@ export async function devicePlayList (id) {
   })
 }
 
-export async function setAutoOpen (id, value) {
+// 0, 1
+export async function setAutoStart (id, value) {
   return axios({
     url: '/cloud/deviceSetting/setAutoOpen',
     method: 'put',
@@ -195,6 +230,7 @@ export async function setAutoOpen (id, value) {
   })
 }
 
+// number
 export async function setVolumn (id, value) {
   return axios({
     url: '/cloud/deviceSetting/setVol',
@@ -206,6 +242,7 @@ export async function setVolumn (id, value) {
   })
 }
 
+// number
 export async function setLight (id, value) {
   return axios({
     url: '/cloud/deviceSetting/setLight',
@@ -238,6 +275,30 @@ export async function setMode (id, value) {
     data: {
       id,
       value
+    }
+  })
+}
+
+export async function setBreath (id, value) {
+  return axios({
+    url: '/cloud/deviceSetting/setBreath',
+    method: 'put',
+    data: {
+      id,
+      value
+    }
+  })
+}
+
+// Positions: array of ids
+export async function deletePlayListItems (id, positions) {
+  console.log(id, positions)
+  return axios({
+    url: '/cloud/device/delPlayList',
+    method: 'put',
+    data: {
+      id,
+      position: positions
     }
   })
 }

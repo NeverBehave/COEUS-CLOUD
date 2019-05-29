@@ -32,7 +32,8 @@
                     <font-awesome-icon
                         slot="prefix"
                         icon="desktop"
-                    /> 设备管理
+                    />
+                    设备管理
                 </template>
                 <el-menu-item-group>
                     <router-link
